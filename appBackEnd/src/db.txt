@@ -29,7 +29,7 @@ use localUserDb;
 
 create Table login(
     userId int(1) primary Key not null,
-    isLogged int(1) default 0,
+    isLogged boolean default false,
 );
 
 create Table Friends(
