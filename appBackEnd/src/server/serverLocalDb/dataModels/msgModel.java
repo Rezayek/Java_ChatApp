@@ -1,12 +1,12 @@
 package server.serverLocalDb.dataModels;
 
-public class msgModel {
+public class MsgModel {
     private int msgId;
     private int convId;
     private int senderId;
     private String text;
 
-    public msgModel(int msgId, int convId, int senderId, String text){
+    public MsgModel(int msgId, int convId, int senderId, String text){
         this.msgId = msgId;
         this.convId = convId;
         this.senderId = senderId;
@@ -40,6 +40,6 @@ public class msgModel {
     public void setText(String text){
         this.text = text;
     }
-
     
 }
+
