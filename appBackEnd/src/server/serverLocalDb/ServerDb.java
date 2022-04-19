@@ -12,6 +12,21 @@ import server.serverLocalDb.dataModels.UserModel;
 public class ServerDb {
     ConnectToDb dbCon = new ConnectToDb();
     PreparedStatement statement ;
+
+    //singleton--------------------------------------
+    private static ServerDb instance;
+
+    private ServerDb(){
+
+    }
+
+    public static ServerDb getInstance(){
+        if(instance == null){
+            instance = new ServerDb();
+        }
+        return instance;
+    }
+    //--------------------------------------------------
     
     public void InsertUser(UserModel user){
         String req = "insert into user(userName, userEmail, userPassword) values(?,?,?,?)";
