@@ -18,6 +18,11 @@ public class SetMsgThread {
     InputStream in ;
     ServerDb serverDb = ServerDb.getInstance();
 
+
+    public SetMsgThread(Socket s){
+        this.s = s;
+    }
+
     public void run() {
 
         while (true){

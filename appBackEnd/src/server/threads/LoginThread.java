@@ -64,6 +64,7 @@ public class LoginThread {
                     loggedData.put("id", String.valueOf(id) );
                     loggedData.put("logged", "true" );
                     outObj.writeObject(loggedData);
+                    outObj.flush();
                 }
             }
             catch (IOException e) {

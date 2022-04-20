@@ -1,14 +1,14 @@
 create database serverDb;
 use serverDb;
 create Table user(
-    userId int(1) primary key not null,
+    userId int(1) primary key not null AUTO_INCREMENT,
     userName varchar(20), 
     userEmail varchar(40), 
     userPassword varchar(30)
 );
 
 create Table conversation(
-    ConvId int(1) primary key not null,
+    ConvId int(1) primary key not null AUTO_INCREMENT,
     firstUserId int(1) not null,
     secondUserId int(1) not null,
     foreign Key(firstUserId) references user(userId),
@@ -16,7 +16,7 @@ create Table conversation(
 );
 
 create Table messages(
-    msgId int(100) primary key not null,
+    msgId int(100) primary key not null  AUTO_INCREMENT,
     ConvId int(1) not null,
     senderId int(1) not null,
     msg varchar(100),

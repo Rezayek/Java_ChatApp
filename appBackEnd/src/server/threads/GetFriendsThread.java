@@ -59,6 +59,7 @@ public class GetFriendsThread {
                             out = s.getOutputStream();
                             outObj = new ObjectOutputStream(out);
                             outObj.writeObject(friendsData);
+                            outObj.flush();
                         }
                         
                     }
