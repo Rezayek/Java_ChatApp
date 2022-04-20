@@ -29,7 +29,7 @@ public class ServerDb {
     //--------------------------------------------------
     
     public void InsertUser(UserModel user){
-        String req = "insert into user(userName, userEmail, userPassword) values(?,?,?,?)";
+        String req = "insert into user(userName, userEmail, userPassword) values(?, ?, ?)";
 
         try {
             statement = ConnectToDb.con.prepareStatement(req);
@@ -71,14 +71,14 @@ public class ServerDb {
 
     }
 
-    public List<UserModel> getFriends(int firstUserId, int secondUserId){
+    public List<UserModel> getFriends(int UserId){
         List<UserModel> usersList = new ArrayList<UserModel>();
         try {
-            statement = ConnectToDb.con.prepareStatement("Select * from conversation where firstUserId = "+ firstUserId + " and secondUserId = "+ secondUserId + " or "+"firstUserId = "+ secondUserId + " and secondUserId = "+ firstUserId  );
+            statement = ConnectToDb.con.prepareStatement("Select * from conversation where firstUserId = "+ UserId + " or secondUserId = "+ UserId);
             ResultSet res = statement.executeQuery();
 
             while (res.next()){
-                if(res.getInt("firstUserId") == firstUserId){
+                if(res.getInt("firstUserId") == UserId){
                     usersList.add(getUser(res.getInt("secondUserId")));
                 }else{
                     usersList.add(getUser(res.getInt("firstUserId")));
@@ -93,10 +93,31 @@ public class ServerDb {
         return usersList;
     }
 
-    public Boolean checkUser(int userId){
+    public int checkUser(String Name){
+        ResultSet res = null;
+        int id = -1;
+        try {
+            statement = ConnectToDb.con.prepareStatement("Select userId from user where userName = "+ Name); 
+            res = statement.executeQuery();
+            while(res.next()){
+                id = res.getInt("userId");
+            }
+            
+        }
+        catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        if(res != null){
+            return id;
+        }else{
+            return id;
+        }
+    }
+
+    public int loginUser(String email, String password){
         ResultSet res = null;
         try {
-            statement = ConnectToDb.con.prepareStatement("Select userId from user where userId = "+ userId); 
+            statement = ConnectToDb.con.prepareStatement("Select userId from user where userEmail = "+ email + " and userPassword = "+ password); 
             res = statement.executeQuery();
             
         }
@@ -104,9 +125,17 @@ public class ServerDb {
             e1.printStackTrace();
         }
         if(res != null){
-            return true;
+            int id =-1;
+            try {
+                while(res.next()){
+                    id = res.getInt("userId");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return id;
         }else{
-            return false;
+            return -1;
         }
     }
 
