@@ -1,10 +1,5 @@
 package server.threads;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -15,7 +10,6 @@ import java.util.Map;
 
 import server.serverLocalDb.ServerDb;
 import server.serverLocalDb.dataModels.MsgModel;
-import server.threads.builds.InBuild;
 import server.threads.builds.OutBuild;
 
 public class GetMsgThread extends Thread  {
@@ -44,6 +38,7 @@ public class GetMsgThread extends Thread  {
                         msgsList = serverDb.getMsgs(Integer.parseInt(requesteData.get("firstuser")), Integer.parseInt(requesteData.get("seconduser")));
 
                         if(msgsList != null){
+                            msgsData.put("result", "msgs");
                             for(int i = 0 ; i < msgsList.size(); i++){
                                 msgsData.put(String.valueOf(msgsList.get(i).getSenderId()), msgsList.get(i).gettext());
                             }

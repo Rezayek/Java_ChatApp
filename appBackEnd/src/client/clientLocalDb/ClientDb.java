@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import client.clientLocalDb.clientModels.FriendDataModel;
-import server.serverLocalDb.ConnectToDb;
+
 
 public class ClientDb {
     ConnectToDbClient dbCon = new ConnectToDbClient();

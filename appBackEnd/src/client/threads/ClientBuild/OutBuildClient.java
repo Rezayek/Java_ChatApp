@@ -1,4 +1,4 @@
-package server.threads.builds;
+package client.threads.ClientBuild;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.Map;
 
 
-public class OutBuild extends Thread{
+public class OutBuildClient extends Thread{
 
 
     private Socket s;
@@ -18,14 +18,12 @@ public class OutBuild extends Thread{
 
 
 
-    public OutBuild(Map<String, String> givenMap, Socket s ) {
+    public OutBuildClient(Map<String, String> givenMap, Socket s ) {
         this.s = s;
         this.givenMap = givenMap;
          
     }
 
-    
-    //--------------------------------------------------
 
     public void run() {
         try {
@@ -40,9 +38,7 @@ public class OutBuild extends Thread{
 
     }
 
-    public void setMap(Map<String, String> givenMap){
-        this.givenMap = givenMap;
-    }
+    
 
 
 

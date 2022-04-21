@@ -36,7 +36,7 @@ public class LoginThread extends Thread  {
             if(expectedValue.equals(actualValue)){
 
                 id = serverDb.loginUser(loginData.get("email"), loginData.get("password"));
-                System.out.println(id);
+                
             }
 
 

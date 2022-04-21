@@ -19,7 +19,6 @@ public class Server {
 
     public static void main(String[] args) {
         int nbClient = 0;
-        Map<String, String> defaultmap = new LinkedHashMap<String, String>();
         try {
             try (ServerSocket server = new ServerSocket(9000)) {
                 while (nbClient < 3 ){

@@ -1,10 +1,6 @@
 package server.threads;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+
 import java.net.Socket;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -15,7 +11,6 @@ import java.util.Map;
 
 import server.serverLocalDb.ServerDb;
 import server.serverLocalDb.dataModels.UserModel;
-import server.threads.builds.InBuild;
 import server.threads.builds.OutBuild;
 
 public class GetFriendsThread extends Thread  {
@@ -44,6 +39,7 @@ public class GetFriendsThread extends Thread  {
 
                     usersList = serverDb.getFriends(Integer.parseInt(requesteData.get("id")));
                     if(usersList != null){
+                        friendsData.put("result", "getfriends");
                         for(int i = 0; i < usersList.size(); i++){
                             friendsData.put(key + String.valueOf(i), String.valueOf(usersList.get(i)));
                         }
