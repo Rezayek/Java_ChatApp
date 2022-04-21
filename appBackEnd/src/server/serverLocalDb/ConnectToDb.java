@@ -8,7 +8,7 @@ public class ConnectToDb {
 
     
     public static Connection con = null;
-    private String url ="jdbc:mysql://localhost:3306/";
+    private String url ="jdbc:mysql://localhost:3306/serverDb";
     private String user = "root";
     private String driver ="com.mysql.jdbc.Driver";
 

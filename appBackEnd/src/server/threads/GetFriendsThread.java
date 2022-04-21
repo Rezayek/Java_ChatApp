@@ -15,60 +15,45 @@ import java.util.Map;
 
 import server.serverLocalDb.ServerDb;
 import server.serverLocalDb.dataModels.UserModel;
+import server.threads.builds.InBuild;
+import server.threads.builds.OutBuild;
 
 public class GetFriendsThread extends Thread  {
     Socket s;
     Map<String, String> requesteData = new LinkedHashMap<String, String>();
     Map<String, String> friendsData = new LinkedHashMap<String, String>();
-    ObjectInputStream inObj ;
-    ObjectOutputStream outObj ;
-    InputStream in;
-    OutputStream out;
     ServerDb serverDb = ServerDb.getInstance();
 
-    public GetFriendsThread(Socket s){
+    public GetFriendsThread(Map<String, String>  requesteData, Socket s ){
         this.s = s;
+        this.requesteData = requesteData;
     }
 
     public void run(){
         while(true){
             String key = "user";
             List<UserModel> usersList = new ArrayList<UserModel>();
-            try {
-                in = s.getInputStream();
-                inObj = new ObjectInputStream(in);
-                try {
-                    requesteData = (Map<String, String>) inObj.readObject();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                if(requesteData.isEmpty() != true){
+            if(requesteData.isEmpty() != true){
 
-                    
-                    Iterator<Map.Entry<String, String>> iterator = requesteData.entrySet().iterator();
-                    Map.Entry<String, String> actualValue = iterator.next();
-                    Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "getfriends");
+                
+                Iterator<Map.Entry<String, String>> iterator = requesteData.entrySet().iterator();
+                Map.Entry<String, String> actualValue = iterator.next();
+                Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "getfriends");
 
-                    if(expectedValue.equals(actualValue)){
+                if(expectedValue.equals(actualValue)){
 
-                        usersList = serverDb.getFriends(Integer.parseInt(requesteData.get("id")));
-                        if(usersList != null){
-                            for(int i = 0; i < usersList.size(); i++){
-                                friendsData.put(key + String.valueOf(i), String.valueOf(usersList.get(i)));
-                            }
-                            out = s.getOutputStream();
-                            outObj = new ObjectOutputStream(out);
-                            outObj.writeObject(friendsData);
-                            outObj.flush();
+                    usersList = serverDb.getFriends(Integer.parseInt(requesteData.get("id")));
+                    if(usersList != null){
+                        for(int i = 0; i < usersList.size(); i++){
+                            friendsData.put(key + String.valueOf(i), String.valueOf(usersList.get(i)));
                         }
+                        new OutBuild(friendsData, s).start();
                         
                     }
-
-
+                    
                 }
-            }
-            catch (IOException e) {
-                e.printStackTrace();
+
+
             }
         }
         

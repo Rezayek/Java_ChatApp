@@ -9,7 +9,7 @@ import client.clientLocalDb.clientModels.FriendDataModel;
 import server.serverLocalDb.ConnectToDb;
 
 public class ClientDb {
-    ConnectToDb dbCon = new ConnectToDb();
+    ConnectToDbClient dbCon = new ConnectToDbClient();
     PreparedStatement statement ;
 
     //singleton--------------------------------------
@@ -30,15 +30,13 @@ public class ClientDb {
 
 
     public void setLoggedUser(int userId , boolean isLogged){
-        String req = "insert into login values(?, ?)";
+        String req = "insert into login(userId, isLogged) values(?, ?)";
 
         try {
-            statement = ConnectToDb.con.prepareStatement(req);
-            //statement.setInt(1, user.getUserId());
+            System.out.println("adding");
+            statement = ConnectToDbClient.con.prepareStatement(req);
             statement.setInt(1, userId);
             statement.setBoolean(2, isLogged);
-            
-
             statement.executeUpdate();
         }
         catch (SQLException e1) {
@@ -51,7 +49,7 @@ public class ClientDb {
     public Boolean isLogged(){
         ResultSet res = null;
         try {
-            statement = ConnectToDb.con.prepareStatement("Select userId from login where isLogged = "+ "true");
+            statement = ConnectToDbClient.con.prepareStatement("Select userId from login where isLogged = "+ "true");
             res = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +64,7 @@ public class ClientDb {
         int id = -1;
         ResultSet res = null;
         try {
-            statement = ConnectToDb.con.prepareStatement("Select userId from login where isLogged = "+ "true");
+            statement = ConnectToDbClient.con.prepareStatement("Select userId from login where isLogged = "+ "true");
             res = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,14 +90,14 @@ public class ClientDb {
         for(int i =0; i< friendList.size(); i++){
             ResultSet res = null;
             try {
-                statement = ConnectToDb.con.prepareStatement("Select friendId from Friends where friendId = "+ friendList.get(i).getFriendId());
+                statement = ConnectToDbClient.con.prepareStatement("Select friendId from Friends where friendId = "+ friendList.get(i).getFriendId());
                 res = statement.executeQuery();
             } catch (SQLException e) {
                 e.printStackTrace();
             } 
             if(res == null){
                 try {
-                    statement = ConnectToDb.con.prepareStatement(req);
+                    statement = ConnectToDbClient.con.prepareStatement(req);
                     //statement.setInt(1, user.getUserId());
                     statement.setInt(1, friendList.get(i).getFriendId());         
         

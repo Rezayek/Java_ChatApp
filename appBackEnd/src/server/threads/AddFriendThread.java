@@ -10,30 +10,22 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import server.serverLocalDb.ServerDb;
+import server.threads.builds.InBuild;
 
 public class AddFriendThread extends Thread  {
     Socket s;
     Map<String, String> friendData = new LinkedHashMap<String, String>();
-    ObjectInputStream inObj ;
-    InputStream in;
+    InBuild inBuild ;
     ServerDb serverDb = ServerDb.getInstance();
 
-    public AddFriendThread(Socket s){
-        this.s = s;
+    public AddFriendThread(Map<String, String> friendData){
+        this.friendData = friendData;
     }
 
 
     public void run(){
         int id ;
         while (true){
-            try {
-                in = s.getInputStream();
-                inObj = new ObjectInputStream(in);
-                try {
-                    friendData = (Map<String, String>) inObj.readObject();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
                 if(friendData.isEmpty() != true){
 
                     
@@ -52,10 +44,8 @@ public class AddFriendThread extends Thread  {
 
                 }
             }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
+            
         }
 
     }
-}
+

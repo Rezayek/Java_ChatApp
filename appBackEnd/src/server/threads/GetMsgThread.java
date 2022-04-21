@@ -15,33 +15,25 @@ import java.util.Map;
 
 import server.serverLocalDb.ServerDb;
 import server.serverLocalDb.dataModels.MsgModel;
+import server.threads.builds.InBuild;
+import server.threads.builds.OutBuild;
 
 public class GetMsgThread extends Thread  {
     Socket s;
-    Map<String, String> requesteData = new LinkedHashMap<String, String>();
+    Map<String, String> requesteData;
     Map<String, String> msgsData = new LinkedHashMap<String, String>();
-    ObjectInputStream inObj ;
-    ObjectOutputStream outObj ;
-    InputStream in;
-    OutputStream out;
     ServerDb serverDb = ServerDb.getInstance();
 
-    public GetMsgThread(Socket s){
+    public GetMsgThread(Map<String, String> requesteData, Socket s){
         this.s = s;
+        this.requesteData = requesteData;
     }
 
     public void run(){
 
         while (true){
             List<MsgModel> msgsList = new ArrayList<MsgModel>();
-            try {
-                in = s.getInputStream();
-                inObj = new ObjectInputStream(in);
-                try {
-                    requesteData = (Map<String, String>) inObj.readObject();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+
 
                 if(requesteData.isEmpty() != true){
                     Iterator<Map.Entry<String, String>> iterator = requesteData.entrySet().iterator();
@@ -55,10 +47,8 @@ public class GetMsgThread extends Thread  {
                             for(int i = 0 ; i < msgsList.size(); i++){
                                 msgsData.put(String.valueOf(msgsList.get(i).getSenderId()), msgsList.get(i).gettext());
                             }
-                            out = s.getOutputStream();
-                            outObj = new ObjectOutputStream(out);
-                            outObj.writeObject(msgsData);
-                            outObj.flush();
+                            new OutBuild(msgsData, s).start();
+                            
 
                         }
 
@@ -68,9 +58,7 @@ public class GetMsgThread extends Thread  {
 
                 
 
-            }catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
-}
+

@@ -29,7 +29,7 @@ public class ServerDb {
     //--------------------------------------------------
     
     public void InsertUser(UserModel user){
-        String req = "insert into user(userName, userEmail, userPassword) values(?, ?, ?)";
+        String req = "insert into userServer(userName, userEmail, userPassword) values(?, ?, ?)";
 
         try {
             statement = ConnectToDb.con.prepareStatement(req);
@@ -48,7 +48,8 @@ public class ServerDb {
     public UserModel getUser(int userId){
         UserModel user = null;
         try {
-            statement = ConnectToDb.con.prepareStatement("Select userId from user where userId = "+ userId);
+            statement = ConnectToDb.con.prepareStatement("Select userId from userServer where userId = ?");
+            statement.setInt(1, userId);
             ResultSet res = statement.executeQuery();
             while (res.next()){
                 user = new UserModel(
@@ -71,14 +72,16 @@ public class ServerDb {
 
     }
 
-    public List<UserModel> getFriends(int UserId){
+    public List<UserModel> getFriends(int userId){
         List<UserModel> usersList = new ArrayList<UserModel>();
         try {
-            statement = ConnectToDb.con.prepareStatement("Select * from conversation where firstUserId = "+ UserId + " or secondUserId = "+ UserId);
+            statement = ConnectToDb.con.prepareStatement("Select * from conversation where firstUserId = ? or secondUserId = ?");
+            statement.setInt(1,userId);
+            statement.setInt(2, userId);
             ResultSet res = statement.executeQuery();
 
             while (res.next()){
-                if(res.getInt("firstUserId") == UserId){
+                if(res.getInt("firstUserId") == userId){
                     usersList.add(getUser(res.getInt("secondUserId")));
                 }else{
                     usersList.add(getUser(res.getInt("firstUserId")));
@@ -93,11 +96,12 @@ public class ServerDb {
         return usersList;
     }
 
-    public int checkUser(String Name){
+    public int checkUser(String name){
         ResultSet res = null;
         int id = -1;
         try {
-            statement = ConnectToDb.con.prepareStatement("Select userId from user where userName = "+ Name); 
+            statement = ConnectToDb.con.prepareStatement("Select userId from userServer where userName = ?"); 
+            statement.setString(1, name );
             res = statement.executeQuery();
             while(res.next()){
                 id = res.getInt("userId");
@@ -117,7 +121,10 @@ public class ServerDb {
     public int loginUser(String email, String password){
         ResultSet res = null;
         try {
-            statement = ConnectToDb.con.prepareStatement("Select userId from user where userEmail = "+ email + " and userPassword = "+ password); 
+            statement = ConnectToDb.con.prepareStatement("Select userId from userServer where userEmail = ? and userPassword = ?"); 
+            statement.setString(1, email);
+            statement.setString(2, password);
+
             res = statement.executeQuery();
             
         }
@@ -159,7 +166,11 @@ public class ServerDb {
     public int getConvId(int firstUserId, int secondUserId){
         int convId = -1;
         try {
-            statement = ConnectToDb.con.prepareStatement("Select ConvId from conversation where firstUserId = "+ firstUserId + " and secondUserId = "+ secondUserId + " or "+"firstUserId = "+ secondUserId + " and secondUserId = "+ firstUserId  );
+            statement = ConnectToDb.con.prepareStatement("Select ConvId from conversation where firstUserId = ? and secondUserId = ? or firstUserId = ? and secondUserId = ?");
+            statement.setInt(1, firstUserId  );
+            statement.setInt(2, secondUserId);
+            statement.setInt(3, secondUserId);
+            statement.setInt(4, firstUserId);
             ResultSet res = statement.executeQuery();
             while (res.next()){
                 convId= res.getInt("ConvId");
@@ -199,7 +210,8 @@ public class ServerDb {
         int convId = getConvId(firstUserId, secondUserId);
 
         try {
-            statement = ConnectToDb.con.prepareStatement("select * from messages where convId = "+ convId );
+            statement = ConnectToDb.con.prepareStatement("select * from messages where convId = ?");
+            statement.setInt(1, convId);
             ResultSet res = statement.executeQuery();
 
             while (res.next()){

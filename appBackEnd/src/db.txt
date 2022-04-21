@@ -1,6 +1,6 @@
 create database serverDb;
 use serverDb;
-create Table user(
+create Table userServer(
     userId int(1) primary key not null AUTO_INCREMENT,
     userName varchar(20), 
     userEmail varchar(40), 
@@ -11,8 +11,8 @@ create Table conversation(
     ConvId int(1) primary key not null AUTO_INCREMENT,
     firstUserId int(1) not null,
     secondUserId int(1) not null,
-    foreign Key(firstUserId) references user(userId),
-    foreign Key(secondUserId) references user(userId),
+    foreign Key(firstUserId) references userserver(userId),
+    foreign Key(secondUserId) references userserver(userId)
 );
 
 create Table messages(
@@ -20,8 +20,8 @@ create Table messages(
     ConvId int(1) not null,
     senderId int(1) not null,
     msg varchar(100),
-    foreign Key(ConvId) references user(conversation),
-    foreign Key(senderId) references user(userId),
+    foreign Key(ConvId) references conversation(ConvId),
+    foreign Key(senderId) references userserver(userId)
 );
 
 create database localUserDb;
@@ -33,6 +33,5 @@ create Table login(
 );
 
 create Table Friends(
-    friendId int(1) primary Key not null,
-    //friendName int(20) not null,//
+    friendId int(1) primary Key not null, 
 );
