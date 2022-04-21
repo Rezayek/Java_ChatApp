@@ -11,7 +11,7 @@ import java.util.Map;
 
 import server.serverLocalDb.ServerDb;
 
-public class SetMsgThread {
+public class SetMsgThread extends Thread  {
     Socket s;
     Map<String, String> msgData = new LinkedHashMap<String, String>();
     ObjectInputStream inObj ;

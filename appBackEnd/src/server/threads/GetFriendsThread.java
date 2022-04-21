@@ -16,7 +16,7 @@ import java.util.Map;
 import server.serverLocalDb.ServerDb;
 import server.serverLocalDb.dataModels.UserModel;
 
-public class GetFriendsThread {
+public class GetFriendsThread extends Thread  {
     Socket s;
     Map<String, String> requesteData = new LinkedHashMap<String, String>();
     Map<String, String> friendsData = new LinkedHashMap<String, String>();

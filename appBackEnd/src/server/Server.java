@@ -21,12 +21,12 @@ public class Server {
             while (nbClient < 3 ){
                 //Listen to incomming requests
                 Socket ClientCon = server.accept();
-                new LoginThread(ClientCon);
-                new SignUpThread(ClientCon);
-                new AddFriendThread(ClientCon);
-                new GetFriendsThread(ClientCon);
-                new SetMsgThread(ClientCon);
-                new GetMsgThread(ClientCon);
+                new LoginThread(ClientCon).start();
+                new SignUpThread(ClientCon).start();
+                new AddFriendThread(ClientCon).start();
+                new GetFriendsThread(ClientCon).start();
+                new SetMsgThread(ClientCon).start();
+                new GetMsgThread(ClientCon).start();
 
             }
         } catch (IOException e) {

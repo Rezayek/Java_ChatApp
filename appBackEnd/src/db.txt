@@ -34,5 +34,5 @@ create Table login(
 
 create Table Friends(
     friendId int(1) primary Key not null,
-    friendName int(20) not null,
+    //friendName int(20) not null,//
 );

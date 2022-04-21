@@ -11,7 +11,7 @@ import java.util.Map;
 
 import server.serverLocalDb.ServerDb;
 
-public class AddFriendThread {
+public class AddFriendThread extends Thread  {
     Socket s;
     Map<String, String> friendData = new LinkedHashMap<String, String>();
     ObjectInputStream inObj ;

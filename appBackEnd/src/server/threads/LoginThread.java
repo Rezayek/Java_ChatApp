@@ -13,7 +13,7 @@ import java.util.Map;
 
 import server.serverLocalDb.ServerDb;
 
-public class LoginThread {
+public class LoginThread extends Thread  {
     Socket s;
     Map<String, String> loginData = new LinkedHashMap<String, String>();
     Map<String, String> loggedData = new LinkedHashMap<String, String>();

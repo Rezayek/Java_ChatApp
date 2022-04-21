@@ -16,7 +16,7 @@ import java.util.Map;
 import server.serverLocalDb.ServerDb;
 import server.serverLocalDb.dataModels.MsgModel;
 
-public class GetMsgThread {
+public class GetMsgThread extends Thread  {
     Socket s;
     Map<String, String> requesteData = new LinkedHashMap<String, String>();
     Map<String, String> msgsData = new LinkedHashMap<String, String>();
