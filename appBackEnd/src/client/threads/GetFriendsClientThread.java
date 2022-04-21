@@ -1,6 +1,5 @@
 package client.threads;
 
-import java.net.Socket;
 import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;

@@ -11,12 +11,7 @@ import java.util.Map;
 
 import client.threads.GetFriendsClientThread;
 import client.threads.GetMsgsClientThread;
-import server.threads.AddFriendThread;
-import server.threads.GetFriendsThread;
-import server.threads.GetMsgThread;
-import server.threads.LoginThread;
-import server.threads.SetMsgThread;
-import server.threads.SignUpThread;
+
 
 public class InBuildClient extends Thread {
     
