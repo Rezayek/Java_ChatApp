@@ -7,7 +7,7 @@ public class GenericMsgsMap {
     
 
     private static GenericMsgsMap  instance;
-    private Map<String, String> genericMap = new LinkedHashMap<String, String>();
+    private static Map<String, String> genericMap = new LinkedHashMap<String, String>();
 
     private GenericMsgsMap (){
 

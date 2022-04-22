@@ -53,7 +53,11 @@ public class SubscribeClient extends Application {
 		
 		Button confirmButton = new Button ("Confirmer");
 		confirmButton.setOnAction(e -> {
-			new SignUpClientThread(client.getSocket(), new UserDataModel(nomTextField.getText(), prenomTextField.getText(), cinTextField.getText())).start();
+			if(nomTextField.getText() != ""){
+				new SignUpClientThread(client.getSocket(), new UserDataModel(nomTextField.getText(), prenomTextField.getText(), cinTextField.getText())).start();
+				nomTextField.setText("");
+			}
+			
 			System.out.println("added");
 		});
 		

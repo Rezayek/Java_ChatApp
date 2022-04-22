@@ -7,7 +7,7 @@ public class GenericFriendsMap {
     
 
     private static GenericFriendsMap  instance;
-    private Map<String, String> genericMap = new LinkedHashMap<String, String>();
+    private static Map<String, String> genericMap = new LinkedHashMap<String, String>();
 
     private GenericFriendsMap (){
 

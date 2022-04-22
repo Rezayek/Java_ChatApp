@@ -49,7 +49,7 @@ public class ClientDb {
     public Boolean isLogged(){
         ResultSet res = null;
         try {
-            statement = ConnectToDbClient.con.prepareStatement("Select userId from login where isLogged = "+ "true");
+            statement = ConnectToDbClient.con.prepareStatement("Select userId from login where isLogged = true");
             res = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,6 +58,16 @@ public class ClientDb {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public void logOut(int userId){
+        try {
+            statement = ConnectToDbClient.con.prepareStatement("update login set isLogged = ? where userId  = ?");
+            statement.setBoolean(1, false);
+            statement.setInt(2, userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     public int getId(){
