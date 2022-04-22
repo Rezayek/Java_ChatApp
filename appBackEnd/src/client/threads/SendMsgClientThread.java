@@ -23,7 +23,7 @@ public class SendMsgClientThread extends Thread {
         msgData.put("send", String.valueOf(msg.getSenderId()));
         msgData.put("to", String.valueOf(sendedToId));
         msgData.put("text", msg.getText());
-        new OutBuild(msgData, client.getSocket());
+        new OutBuild(msgData, client.getSocket()).start();
 
     }
     

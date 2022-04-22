@@ -27,6 +27,7 @@ public class OutBuildClient extends Thread{
 
     public void run() {
         try {
+            System.out.println(givenMap.get("name"));
             out = s.getOutputStream();
             outObj = new ObjectOutputStream(out);
             outObj.writeObject(givenMap);

@@ -1,7 +1,10 @@
 package testApp;
 
 import client.Client;
+import client.clientLocalDb.clientModels.MsgDataModel;
 import client.clientLocalDb.clientModels.UserDataModel;
+import client.threads.SendFriendClientThread;
+import client.threads.SendMsgClientThread;
 import client.threads.SignUpClientThread;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -12,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import server.serverLocalDb.dataModels.MsgModel;
 
 public class SubscribeClient extends Application {
     Client client = Client.getInstance();
@@ -54,7 +58,10 @@ public class SubscribeClient extends Application {
 		Button confirmButton = new Button ("Confirmer");
 		confirmButton.setOnAction(e -> {
 			if(nomTextField.getText() != ""){
-				new SignUpClientThread(client.getSocket(), new UserDataModel(nomTextField.getText(), prenomTextField.getText(), cinTextField.getText())).start();
+				//new SendFriendClientThread("ahmed", 68).start();
+				MsgDataModel msg = new MsgDataModel(68, nomTextField.getText());
+				//new SignUpClientThread(client.getSocket(), new UserDataModel(nomTextField.getText(), prenomTextField.getText(), cinTextField.getText())).start();
+				new SendMsgClientThread(msg, 69).start();
 				nomTextField.setText("");
 			}
 			

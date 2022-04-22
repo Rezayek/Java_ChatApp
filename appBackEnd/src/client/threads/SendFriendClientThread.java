@@ -23,7 +23,8 @@ public class SendFriendClientThread extends Thread {
         friendData.put("event", "addfriend");
         friendData.put("name", friendName);
         friendData.put("id", String.valueOf(userId));
-        new OutBuild(friendData, client.getSocket());
+        System.out.println(friendData.get("name"));
+        new OutBuild(friendData, client.getSocket()).start();
 
 
 

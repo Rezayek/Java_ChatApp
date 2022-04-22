@@ -45,8 +45,8 @@ public class InBuildClient extends Thread {
                 e.printStackTrace();
             }
             //in main app we can use genericmaps to get access to the given maps
-            new GetFriendsClientThread(userId, defaultMap);
-            new GetMsgsClientThread(userId, secondUserId, defaultMap);
+            new GetFriendsClientThread(userId, defaultMap).start();
+            new GetMsgsClientThread(userId, secondUserId, defaultMap).start();
             
             
             

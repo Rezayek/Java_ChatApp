@@ -29,7 +29,7 @@ public class GetMsgsClientThread extends Thread {
         requesteData.put("event", "msgs");
         requesteData.put("firstuser",String.valueOf(userId));
         requesteData.put("seconduser",String.valueOf(secondUserId));
-        new OutBuild(requesteData, client.getSocket());
+        new OutBuild(requesteData, client.getSocket()).start();
 
 
         if(resultsData.isEmpty() != true){

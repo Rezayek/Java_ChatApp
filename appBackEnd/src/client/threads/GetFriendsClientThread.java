@@ -26,7 +26,7 @@ public class GetFriendsClientThread extends Thread {
 
         friendsData.put("event", "getfriends");
         friendsData.put("id",String.valueOf(userId));
-        new OutBuild(friendsData, client.getSocket());
+        new OutBuild(friendsData, client.getSocket()).start();
 
 
         if(resultsData.isEmpty() != true){

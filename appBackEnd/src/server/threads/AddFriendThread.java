@@ -23,25 +23,25 @@ public class AddFriendThread extends Thread  {
 
     public void run(){
         int id ;
-        while (true){
-                if(friendData.isEmpty() != true){
+        System.out.println("friend name server : "+friendData.get("name"));
+            if(friendData.isEmpty() != true){
 
+                
+                Iterator<Map.Entry<String, String>> iterator = friendData.entrySet().iterator();
+                Map.Entry<String, String> actualValue = iterator.next();
+                Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "addfriend");
+                System.out.println("friend name server : "+friendData.get("name"));
+                if(expectedValue.equals(actualValue)){
+                    id = serverDb.checkUser(friendData.get("name"));
                     
-                    Iterator<Map.Entry<String, String>> iterator = friendData.entrySet().iterator();
-                    Map.Entry<String, String> actualValue = iterator.next();
-                    Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "addfriend");
-
-                    if(expectedValue.equals(actualValue)){
-                        id = serverDb.checkUser(friendData.get("name"));
-                        
-                        if(id != -1){
-                            serverDb.createConv(id, Integer.parseInt(friendData.get("id")));
-                        }
+                    if(id != -1){
+                        serverDb.createConv(id, Integer.parseInt(friendData.get("id")));
                     }
-
-
                 }
+
+
             }
+            
             
         }
 

@@ -21,21 +21,21 @@ public class SetMsgThread extends Thread  {
 
     public void run() {
 
-        while (true){
-                if(msgData.isEmpty() != true){
+        
+            if(msgData.isEmpty() != true){
 
-                    
-                    Iterator<Map.Entry<String, String>> iterator = msgData.entrySet().iterator();
-                    Map.Entry<String, String> actualValue = iterator.next();
-                    Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "setmsg");
-                    if(expectedValue.equals(actualValue)){
-                        serverDb.insertMsg(Integer.parseInt(msgData.get("send")), Integer.parseInt(msgData.get("to")), msgData.get("text"));
-                    }
                 
+                Iterator<Map.Entry<String, String>> iterator = msgData.entrySet().iterator();
+                Map.Entry<String, String> actualValue = iterator.next();
+                Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "setmsg");
+                if(expectedValue.equals(actualValue)){
+                    serverDb.insertMsg(Integer.parseInt(msgData.get("send")), Integer.parseInt(msgData.get("to")), msgData.get("text"));
                 }
-
-
+            
             }
+
+
+            
         }
     }
 

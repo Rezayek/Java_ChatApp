@@ -25,7 +25,6 @@ public class OutBuild extends Thread{
     }
 
     
-    //--------------------------------------------------
 
     public void run() {
         try {
@@ -40,9 +39,7 @@ public class OutBuild extends Thread{
 
     }
 
-    public void setMap(Map<String, String> givenMap){
-        this.givenMap = givenMap;
-    }
+    
 
 
 

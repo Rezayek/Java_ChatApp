@@ -27,7 +27,7 @@ public class Server {
                     Socket ClientCon = server.accept();
                     
                     new InBuild(ClientCon).start();
-                    
+                    nbClient++;
 
                 }
             }
