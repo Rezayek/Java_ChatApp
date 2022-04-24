@@ -2,6 +2,7 @@ package server.threads;
 
 
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -35,7 +36,12 @@ public class LoginThread extends Thread  {
 
             if(expectedValue.equals(actualValue)){
 
-                id = serverDb.loginUser(loginData.get("email"), loginData.get("password"));
+                try {
+                    id = serverDb.loginUser(loginData.get("email"), loginData.get("password"));
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 
             }
 

@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller.ChatController">
+   <left>
+      <HBox styleClass="gray-background" stylesheets="@../Style/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="574.0" prefWidth="63.0" styleClass="dark-violet-background" stylesheets="@../Style/style.css">
+               <children>
+                  <Pane layoutX="10.0" layoutY="128.0" prefHeight="231.0" prefWidth="63.0" />
+                  <ImageView fx:id="chatBtn" fitHeight="42.0" fitWidth="36.0" layoutX="47.0" layoutY="297.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-chat-bubble-50.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="usersBtn" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-user-groups-26.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="profileBtn" fitHeight="31.0" fitWidth="35.0" layoutX="47.0" layoutY="284.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-user-50.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="settingsBtn" layoutX="47.0" layoutY="310.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-settings-24.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Pane prefHeight="200.0" prefWidth="200.0" stylesheets="@../Style/style.css" VBox.vgrow="ALWAYS" />
+                  <ImageView fx:id="signoutBtn" layoutX="45.0" layoutY="326.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-logout-30.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox prefHeight="574.0" prefWidth="278.0" styleClass="violet-background" stylesheets="@../Style/style.css">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="42.0" prefWidth="200.0" stylesheets="@../Style/style.css">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Assets/images/icons8-search-50.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <TextField prefHeight="26.0" prefWidth="184.0" promptText="search" styleClass="transparent-background" stylesheets="@../Style/style.css">
+                           <font>
+                              <Font name="Ebrima" size="15.0" />
+                           </font></TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="radius" />
+                        <String fx:value="dark-violet-background" />
+                     </styleClass>
+                  </HBox>
+                  <Pane prefHeight="2.0" prefWidth="200.0" styleClass="dark-gray-background" stylesheets="@../Style/style.css" />
+                  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="262.0">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Assets/images/icons8-male-user-50.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox prefHeight="58.0" prefWidth="191.0">
+                           <children>
+                              <Label text="Rzouga" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="You : Thank you  " textFill="#e7e3e3">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="95.0" prefHeight="29.0" prefWidth="262.0">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Assets/images/Screenshot_2022-04-20_115003-removebg-preview%20(1).png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox prefHeight="58.0" prefWidth="191.0">
+                           <children>
+                              <Label text="Hadil " textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Hay nokhrjou ndourou baad !?  " textFill="#e7e3e3">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="95.0" prefHeight="29.0" prefWidth="262.0">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Assets/images/icons8-male-user-50.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox prefHeight="58.0" prefWidth="166.0">
+                           <children>
+                              <Label text="Haider " textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="You : Thank you  " textFill="#e7e3e3">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                        <Pane layoutX="243.0" layoutY="10.0" prefHeight="68.0" prefWidth="21.0">
+                           <children>
+                              <Circle fill="#36a977" layoutX="11.0" layoutY="34.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="163.0" prefHeight="29.0" prefWidth="262.0">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Assets/images/Screenshot_2022-04-20_114809-removebg-preview.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox prefHeight="58.0" prefWidth="166.0">
+                           <children>
+                              <Label text="Rayen" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="You : Thank you  " textFill="#e7e3e3">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                        <Pane prefHeight="68.0" prefWidth="21.0">
+                           <children>
+                              <Circle fill="#9caea6" layoutX="11.0" layoutY="34.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="440.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="116.0" text="Rayen" textFill="#948a8a">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Circle fill="#6ce166" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label prefHeight="28.0" prefWidth="78.0" text="Online" textFill="#948a8a" />
+                  <Pane prefHeight="82.0" prefWidth="123.0" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-call-30.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-camera-24.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-menu-vertical-24.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Pane prefHeight="3.0" prefWidth="440.0" styleClass="gray-background" stylesheets="@../Style/style.css" />
+            <ScrollPane prefHeight="442.0" prefWidth="440.0">
+               <content>
+                  <Pane prefHeight="427.0" prefWidth="442.0" styleClass="light-gray-background" stylesheets="@../Style/style.css">
+                     <children>
+                        <HBox layoutX="-4.0" layoutY="14.0" prefHeight="50.0" prefWidth="430.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Assets/images/Screenshot_2022-04-20_114809-removebg-preview.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefHeight="35.0" prefWidth="54.0" styleClass="incoming-bubble" stylesheets="@../Style/style.css" text="  Hello" textAlignment="CENTER" textFill="#716868">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" layoutX="1.0" layoutY="64.0" prefHeight="50.0" prefWidth="420.0">
+                           <children>
+                              <Label prefHeight="35.0" prefWidth="86.0" stylesheets="@../Style/style.css" text="Ryry wynk " textAlignment="CENTER" textFill="#efe3e3" wrapText="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="incoming-bubble" />
+                                    <String fx:value="outcoming-bubble" />
+                                 </styleClass>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Assets/images/Screenshot_2022-04-21_230018-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="-5.0" layoutY="216.0" prefHeight="50.0" prefWidth="431.0">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Assets/images/Screenshot_2022-04-20_114809-removebg-preview.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefHeight="35.0" prefWidth="40.0" styleClass="incoming-bubble" stylesheets="@../Style/style.css" text="Cv " textAlignment="CENTER" textFill="#716868">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="-4.0" layoutY="121.0" prefHeight="50.0" prefWidth="439.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Assets/images/Screenshot_2022-04-20_114809-removebg-preview.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefHeight="35.0" prefWidth="68.0" styleClass="incoming-bubble" stylesheets="@../Style/style.css" text="Cv mela" textAlignment="CENTER" textFill="#716868">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" layoutY="171.0" prefHeight="39.0" prefWidth="421.0">
+                           <children>
+                              <Label prefHeight="39.0" prefWidth="102.0" stylesheets="@../Style/style.css" text="Hany oenty  ?  " textFill="#efe3e3" wrapText="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="incoming-bubble" />
+                                    <String fx:value="outcoming-bubble" />
+                                 </styleClass>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Assets/images/Screenshot_2022-04-21_230018-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </Pane>
+               </content>
+            </ScrollPane>
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="440.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="28.0" layoutX="216.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-happy-50.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-attach-50.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField prefHeight="42.0" prefWidth="317.0" promptText="type something to send .." />
+                  <ImageView fitHeight="32.0" fitWidth="28.0" layoutX="121.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/images/icons8-send-32.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

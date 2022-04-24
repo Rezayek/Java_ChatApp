@@ -1,0 +1,56 @@
+.dark-violet-background{
+	-fx-background-color: #34234b;
+}
+.violet-background{
+	-fx-background-color: #402e58;
+
+
+}
+.transparent-background{
+	-fx-background-color: rgba(0,0,0,0);
+
+}
+.radius{
+	-fx-background-radius: 100px;
+}
+
+.light-gray-background{
+	-fx-background-color :#DADADA ;
+	
+}
+.incoming-bubble{
+	-fx-background-color :#FFFFFF ;
+	-fx-background-radius: 100px;
+	
+	
+}
+.outcoming-bubble{
+	-fx-background-color :#7f49b3;	
+	-fx-background-radius: 100px;
+}
+.txtFont{
+ -fx-text-fill:white;
+ }
+ 
+ 
+ 
+
+btnBack:hover {
+    -fx-opacity: 1;
+}
+
+.btnLogin {
+    -fx-background-color: #4f5b62;
+}
+
+.btnLogin:hover {
+    -fx-background-color: #62727b !important;
+    -fx-text-fill: #ef63f2;
+}
+
+
+.txtFont:focused {
+    -fx-border-color: transparent transparent #d7d7d7 transparent;
+    -fx-text-fill:#d7d7d7;
+}
+

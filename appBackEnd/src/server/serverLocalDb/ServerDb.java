@@ -117,8 +117,24 @@ public class ServerDb {
             return id;
         }
     }
+    public Boolean checkUserEmail(String email) throws SQLException{
+        ResultSet res = null;
+        try {
+            statement = ConnectToDb.con.prepareStatement("Select userEmail from userServer where userEmail = ?"); 
+            statement.setString(1, email );
+            res = statement.executeQuery();            
+        }
+        catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        if(res.isFirst()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
-    public int loginUser(String email, String password){
+    public int loginUser(String email, String password) throws SQLException{
         ResultSet res = null;
         try {
             statement = ConnectToDb.con.prepareStatement("Select userId from userServer where userEmail = ? and userPassword = ?"); 
@@ -131,7 +147,7 @@ public class ServerDb {
         catch (SQLException e1) {
             e1.printStackTrace();
         }
-        if(res != null){
+        if(res.isFirst()){
             int id =-1;
             try {
                 while(res.next()){

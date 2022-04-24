@@ -30,7 +30,7 @@ public class AddFriendThread extends Thread  {
                 Iterator<Map.Entry<String, String>> iterator = friendData.entrySet().iterator();
                 Map.Entry<String, String> actualValue = iterator.next();
                 Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "addfriend");
-                System.out.println("friend name server : "+friendData.get("name"));
+               
                 if(expectedValue.equals(actualValue)){
                     id = serverDb.checkUser(friendData.get("name"));
                     

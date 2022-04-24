@@ -42,7 +42,7 @@ public class InBuild extends Thread {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            System.out.println(defaultMap.get("name"));
+            //System.out.println(defaultMap.get("name"));
             new LoginThread(defaultMap, s).start();
             new SignUpThread(defaultMap).start();
             new SetMsgThread(defaultMap).start();

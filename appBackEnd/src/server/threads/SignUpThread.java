@@ -2,6 +2,7 @@ package server.threads;
 
 
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -27,14 +28,26 @@ public class SignUpThread extends Thread {
                 Map.Entry<String, String> actualValue = iterator.next();
                 Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "signup");
 
+                
                 if(expectedValue.equals(actualValue)){
-                    UserModel user = new UserModel(00, null, null, null);
+                    System.out.println("sign up thread"+signUpData.get("email"));
+                    try {
+                        if(serverDb.checkUserEmail(signUpData.get("email")) == false){
+                            UserModel user = new UserModel(00, null, null, null);
+                        
+                            user.setUserName(signUpData.get("name"));
+                            user.setUserEmail(signUpData.get("email"));
+                            user.setUserPassword(signUpData.get("password"));
+                            System.out.println("i am here signing" + signUpData.get("password"));
+                            serverDb.InsertUser(user);
+
+                        }
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
                     
-                    user.setUserName(signUpData.get("name"));
-                    user.setUserEmail(signUpData.get("email"));
-                    user.setUserPassword(signUpData.get("password"));
-                    System.out.println("i am here signing" + signUpData.get("password"));
-                    serverDb.InsertUser(user);
                             
                 }
 

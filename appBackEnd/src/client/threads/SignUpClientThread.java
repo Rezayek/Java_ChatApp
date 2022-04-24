@@ -29,13 +29,16 @@ public class SignUpClientThread extends Thread {
     public void run(){
 
         try {
+            System.out.println("sign up");
             signUpData.put("event", "signup");
             signUpData.put("name", user.getUserName());
             signUpData.put("email", user.getUserEmail());
             signUpData.put("password", user.getUserPassword());
+            System.out.println(signUpData.get("name"));
             out = s.getOutputStream();
             outObj = new ObjectOutputStream(out);
             outObj.writeObject(signUpData);
+            System.out.println("sign up out");
             
 
 

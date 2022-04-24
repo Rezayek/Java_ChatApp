@@ -60,7 +60,9 @@ public class SubscribeClient extends Application {
 			if(nomTextField.getText() != ""){
 				//new SendFriendClientThread("ahmed", 68).start();
 				MsgDataModel msg = new MsgDataModel(68, nomTextField.getText());
-				//new SignUpClientThread(client.getSocket(), new UserDataModel(nomTextField.getText(), prenomTextField.getText(), cinTextField.getText())).start();
+
+				new SignUpClientThread(client.getSocket(), new UserDataModel(nomTextField.getText(), prenomTextField.getText(), cinTextField.getText())).start();
+				
 				new SendMsgClientThread(msg, 69).start();
 				nomTextField.setText("");
 			}

@@ -46,15 +46,17 @@ public class ClientDb {
     }
 
 
-    public Boolean isLogged(){
+    //return true if there is user in login state
+    public Boolean isLogged() throws SQLException{
         ResultSet res = null;
         try {
-            statement = ConnectToDbClient.con.prepareStatement("Select userId from login where isLogged = true");
+            statement = ConnectToDbClient.con.prepareStatement("Select userId from login where isLogged = ?");
+            statement.setBoolean(1, true);
             res = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         } 
-        if(res != null){
+        if(res.next()){
             return true;
         }else{
             return false;
@@ -70,6 +72,8 @@ public class ClientDb {
             e.printStackTrace();
         }
     }
+
+    //get the logged user id
     public int getId(){
         int id = -1;
         ResultSet res = null;
