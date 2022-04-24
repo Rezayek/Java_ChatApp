@@ -26,7 +26,6 @@ public class GetFriendsThread extends Thread  {
 
     public void run(){
         while(true){
-            String key = "user";
             List<UserModel> usersList = new ArrayList<UserModel>();
             if(requesteData.isEmpty() != true){
 
@@ -41,7 +40,8 @@ public class GetFriendsThread extends Thread  {
                     if(usersList != null){
                         friendsData.put("result", "getfriends");
                         for(int i = 0; i < usersList.size(); i++){
-                            friendsData.put(key + String.valueOf(i), String.valueOf(usersList.get(i)));
+                            UserModel userName = serverDb.getUser(usersList.get(i).getUserId());
+                            friendsData.put(String.valueOf(userName.getUserId()), usersList.get(i).getUserName());
                         }
                         new OutBuild(friendsData, s).start();
                         
