@@ -15,11 +15,7 @@ public class ServerDb {
 
     //singleton--------------------------------------
     private static ServerDb instance;
-
-    private ServerDb(){
-
-    }
-
+    private ServerDb(){}
     public static ServerDb getInstance(){
         if(instance == null){
             instance = new ServerDb();

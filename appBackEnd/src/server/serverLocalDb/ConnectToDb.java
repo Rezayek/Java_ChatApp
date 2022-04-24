@@ -23,19 +23,12 @@ public class ConnectToDb {
         try {
             
             con = DriverManager.getConnection(url, user, "");
-            if(con != null){
-                
-            }else if (con == null){
-                
-            }
-            
             
         } catch (SQLException e) {
             
             e.printStackTrace();
         }
-        
-        
+          
     }
 
 }
