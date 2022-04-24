@@ -1,0 +1,16 @@
+
+
+the map the you are going to display has key :friend name **** a value : friend id.
+check server/threads/GetFriendsThread.java line: 40
+
+*****************************************
+
+the map for the messages has key :sender Id **** a value : the message.
+check server/threads/GetMsgThread.java line: 40
+
+*******************************************
+
+for the main UI we will use genericMap for friends and messages 
+check client/threads/clientBuild/genericsMaps
+
+
