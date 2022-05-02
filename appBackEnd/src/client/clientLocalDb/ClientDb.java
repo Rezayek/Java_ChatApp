@@ -30,18 +30,34 @@ public class ClientDb {
 
 
     public void setLoggedUser(int userId , boolean isLogged){
-        String req = "insert into login(userId, isLogged) values(?, ?)";
+        if(checkUser(userId)){
+            
+            try {
+                statement = ConnectToDbClient.con.prepareStatement("update login set isLogged = ? where userId  = ?");
+                statement.setBoolean(1, true);
+                statement.setInt(2, userId);
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            System.out.println("adding");
-            statement = ConnectToDbClient.con.prepareStatement(req);
-            statement.setInt(1, userId);
-            statement.setBoolean(2, isLogged);
-            statement.executeUpdate();
+        }else{
+            String req = "insert into login(userId, isLogged) values(?, ?)";
+
+            try {
+                System.out.println("adding");
+                statement = ConnectToDbClient.con.prepareStatement(req);
+                statement.setInt(1, userId);
+                statement.setBoolean(2, isLogged);
+                statement.executeUpdate();
+
+            }
+            catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+
         }
-        catch (SQLException e1) {
-            e1.printStackTrace();
-        }
+        
 
     }
 
@@ -65,11 +81,28 @@ public class ClientDb {
 
     public void logOut(int userId){
         try {
+            System.out.println("log out");
             statement = ConnectToDbClient.con.prepareStatement("update login set isLogged = ? where userId  = ?");
             statement.setBoolean(1, false);
             statement.setInt(2, userId);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    public Boolean checkUser(int userId){
+        ResultSet res = null;
+        try {
+            statement = ConnectToDbClient.con.prepareStatement("Select userId from login where userId = ? ");
+            statement.setInt(1, userId);
+            res = statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+        if(res != null){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -78,7 +111,8 @@ public class ClientDb {
         int id = -1;
         ResultSet res = null;
         try {
-            statement = ConnectToDbClient.con.prepareStatement("Select userId from login where isLogged = "+ "true");
+            statement = ConnectToDbClient.con.prepareStatement("Select userId from login where isLogged = ? ");
+            statement.setBoolean(1, true);
             res = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();

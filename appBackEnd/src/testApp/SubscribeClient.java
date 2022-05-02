@@ -3,7 +3,7 @@ package testApp;
 import client.Client;
 import client.clientLocalDb.clientModels.MsgDataModel;
 import client.clientLocalDb.clientModels.UserDataModel;
-import client.threads.SendFriendClientThread;
+
 import client.threads.SendMsgClientThread;
 import client.threads.SignUpClientThread;
 import javafx.application.Application;
@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import server.serverLocalDb.dataModels.MsgModel;
+
 
 public class SubscribeClient extends Application {
     Client client = Client.getInstance();

@@ -1,13 +1,14 @@
 package application.Controller;
 
-import application.Model.User;
 import client.Client;
 import client.clientLocalDb.ClientDb;
 import client.clientLocalDb.clientModels.UserDataModel;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,15 +16,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Timer;
 
 import client.threads.LoginClientThread;
 import client.threads.SignUpClientThread;
@@ -70,12 +71,18 @@ public class UserController {
     public Label nameExists;
     @FXML
     public Label checkEmail;
+    @FXML
+    public Button loginBtn;
     public static String username, password, gender;
-    public static ArrayList<User> loggedInUser = new ArrayList<>();
-    public static ArrayList<User> users = new ArrayList<User>();
+    
 
     Client client = Client.getInstance();
     ClientDb clientDb = ClientDb.getInstance();
+    @FXML public void onMouseClickedCancelBtn(InputEvent e) {
+        final Node source = (Node) e.getSource();
+        final Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+    }
   //sign Up
   //username,email,password, phone number, gender: are required
   //validate the non existance of the user who is trying to signup with the method checkUser 
@@ -144,20 +151,13 @@ public class UserController {
 //if user's username and password exists in the User table than the chat account will be opened and the user will be added in Array list of the login users 
 //else error message will be displayed
 
-    public void login() throws SQLException {
+    public void login() throws SQLException, InterruptedException {
         username = userName.getText();
         password = passWord.getText();
         new LoginClientThread(client.getSocket(), username, password).start();
-
-
-        System.out.println(clientDb.isLogged());
         
-        if (clientDb.isLogged()) {
-            changeWindow();
+        changeWindow();
             
-        } else {
-            loginNotifier.setOpacity(1);
-        }
     }
 //_________________________________________________________________________________________________________
 //open messenger window after login 
@@ -168,9 +168,9 @@ public class UserController {
         
         
         try {
-             root = FXMLLoader.load(this.getClass().getResource("../View/chatLayout.fxml"));
+            root = FXMLLoader.load(this.getClass().getResource("../View/chatLayout.fxml"));
             stage.setScene(new Scene(root));
-            stage.setTitle(username + "");
+            stage.setTitle("main");
             stage.setOnCloseRequest(event -> {
                 System.exit(0);
             });

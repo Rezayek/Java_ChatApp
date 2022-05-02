@@ -25,7 +25,7 @@ public class GetMsgThread extends Thread  {
 
     public void run(){
 
-        while (true){
+        
             List<MsgModel> msgsList = new ArrayList<MsgModel>();
 
 
@@ -37,7 +37,7 @@ public class GetMsgThread extends Thread  {
                     if(expectedValue.equals(actualValue)){
                         msgsList = serverDb.getMsgs(Integer.parseInt(requesteData.get("firstuser")), Integer.parseInt(requesteData.get("seconduser")));
 
-                        if(msgsList != null){
+                        if(msgsList.isEmpty() != true){
                             msgsData.put("result", "msgs");
                             for(int i = 0 ; i < msgsList.size(); i++){
                                 msgsData.put(String.valueOf(msgsList.get(i).getSenderId()), msgsList.get(i).gettext());
@@ -48,12 +48,15 @@ public class GetMsgThread extends Thread  {
                         }
 
                     
-                    }
+                    
                 }
 
                 
 
             }
+        
         }
+
+            
     }
 

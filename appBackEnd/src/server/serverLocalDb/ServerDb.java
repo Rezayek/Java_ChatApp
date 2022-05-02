@@ -44,7 +44,7 @@ public class ServerDb {
     public UserModel getUser(int userId){
         UserModel user = null;
         try {
-            statement = ConnectToDb.con.prepareStatement("Select userId from userServer where userId = ?");
+            statement = ConnectToDb.con.prepareStatement("Select * from userServer where userId = ?");
             statement.setInt(1, userId);
             ResultSet res = statement.executeQuery();
             while (res.next()){
@@ -71,12 +71,14 @@ public class ServerDb {
     public List<UserModel> getFriends(int userId){
         List<UserModel> usersList = new ArrayList<UserModel>();
         try {
-            statement = ConnectToDb.con.prepareStatement("Select * from conversation where firstUserId = ? or secondUserId = ?");
+            
+            statement = ConnectToDb.con.prepareStatement("Select * from conversation where firstUserId = ? OR secondUserId = ?");
             statement.setInt(1,userId);
             statement.setInt(2, userId);
             ResultSet res = statement.executeQuery();
-
             while (res.next()){
+                System.out.println("here");
+                System.out.println("user : "+ getUser(res.getInt("secondUserId")).getUserId());
                 if(res.getInt("firstUserId") == userId){
                     usersList.add(getUser(res.getInt("secondUserId")));
                 }else{
@@ -89,6 +91,7 @@ public class ServerDb {
             e.printStackTrace();
         }
 
+        System.out.println("Db friends: "+ usersList);
         return usersList;
     }
 
@@ -143,16 +146,8 @@ public class ServerDb {
         catch (SQLException e1) {
             e1.printStackTrace();
         }
-        if(res.isFirst()){
-            int id =-1;
-            try {
-                while(res.next()){
-                    id = res.getInt("userId");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return id;
+        if(res.next()){
+            return  res.getInt("userId");
         }else{
             return -1;
         }

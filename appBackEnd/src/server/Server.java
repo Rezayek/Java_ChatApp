@@ -3,14 +3,7 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import server.threads.AddFriendThread;
-import server.threads.GetFriendsThread;
-import server.threads.GetMsgThread;
 import server.threads.builds.InBuild;
-import server.threads.builds.OutBuild;
 
 
 public class Server {

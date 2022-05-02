@@ -39,7 +39,7 @@ public class LoginThread extends Thread  {
                 try {
                     id = serverDb.loginUser(loginData.get("email"), loginData.get("password"));
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
+                    
                     e.printStackTrace();
                 }
                 
@@ -47,13 +47,16 @@ public class LoginThread extends Thread  {
 
 
         }
+        System.out.println("id ? :"+id);
         
         if(id != -1){
             loggedData.put("event", "islogged");
             loggedData.put("id", String.valueOf(id) );
             loggedData.put("logged", "true" );
             System.out.println(loggedData.get("id"));
+            
             new OutBuild(loggedData, s).start();
+
             
         }
         

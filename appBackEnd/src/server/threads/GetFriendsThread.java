@@ -25,7 +25,7 @@ public class GetFriendsThread extends Thread  {
     }
 
     public void run(){
-        while(true){
+        
             List<UserModel> usersList = new ArrayList<UserModel>();
             if(requesteData.isEmpty() != true){
 
@@ -33,26 +33,31 @@ public class GetFriendsThread extends Thread  {
                 Iterator<Map.Entry<String, String>> iterator = requesteData.entrySet().iterator();
                 Map.Entry<String, String> actualValue = iterator.next();
                 Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "getfriends");
-
+                System.out.println(requesteData);
                 if(expectedValue.equals(actualValue)){
 
                     usersList = serverDb.getFriends(Integer.parseInt(requesteData.get("id")));
-                    if(usersList != null){
+                    
+                    if(usersList.isEmpty() != true){
                         friendsData.put("result", "getfriends");
                         for(int i = 0; i < usersList.size(); i++){
                             UserModel userName = serverDb.getUser(usersList.get(i).getUserId());
-                            friendsData.put(String.valueOf(userName.getUserId()), usersList.get(i).getUserName());
+                            friendsData.put(String.valueOf(userName.getUserId()),userName.getUserName());
+                            
                         }
                         new OutBuild(friendsData, s).start();
                         
                     }
                     
-                }
+                
 
 
             }
-        }
+        
         
 
     }
+
+        }
+            
 }

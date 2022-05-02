@@ -1,48 +1,70 @@
 package client.threads;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.net.Socket;
 import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import client.Client;
-import client.threads.ClientBuild.genericMaps.GenericFriendsMap;
+
+
+
 import server.threads.builds.OutBuild;
 
 public class GetFriendsClientThread extends Thread {
+    public static Map<String, String> genericFriendMap;
+
     Map<String, String> friendsData = new LinkedHashMap<String, String>();
     Map<String, String> resultsData = new LinkedHashMap<String, String>();
-    GenericFriendsMap friends = GenericFriendsMap.getInstance();
-    Client client = Client.getInstance();
     private int userId;
+    ObjectInputStream inObj ;
+    InputStream in;
+    Socket s;
 
-    public GetFriendsClientThread(int userId, Map<String, String> resultsData){
+
+
+
+    public GetFriendsClientThread(int userId, Socket s ){
         this.userId = userId;
-        this.resultsData = resultsData;
+        this.s = s;
     }
 
     
+
+    
     public void run(){
+        
+            
+            friendsData.put("event", "getfriends");
+            friendsData.put("id",String.valueOf(userId)); 
+            new OutBuild(friendsData, s).start();
+            try {
 
-        friendsData.put("event", "getfriends");
-        friendsData.put("id",String.valueOf(userId));
-        new OutBuild(friendsData, client.getSocket()).start();
+                in = s.getInputStream();
+                inObj = new ObjectInputStream(in);
+                resultsData = (Map<String, String>) inObj.readObject();
+
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }  
+            if(resultsData.isEmpty() != true){
+
+                Iterator<Map.Entry<String, String>> iterator = resultsData.entrySet().iterator();
+                Map.Entry<String, String> actualValue = iterator.next();
+                Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("result", "getfriends");
+
+                if(expectedValue.equals(actualValue)){
+                    genericFriendMap = resultsData;
+                }
 
 
-        if(resultsData.isEmpty() != true){
-
-            Iterator<Map.Entry<String, String>> iterator = resultsData.entrySet().iterator();
-            Map.Entry<String, String> actualValue = iterator.next();
-            Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("result", "getfriends");
-
-            if(expectedValue.equals(actualValue)){
-
-                friends.setGenericMap(resultsData);
-                
             }
 
-
+        
         }
 
-    }
+        
 }

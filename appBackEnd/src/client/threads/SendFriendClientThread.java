@@ -2,6 +2,7 @@ package client.threads;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import client.Client;
 import server.threads.builds.OutBuild;
@@ -25,9 +26,6 @@ public class SendFriendClientThread extends Thread {
         friendData.put("id", String.valueOf(userId));
         System.out.println(friendData.get("name"));
         new OutBuild(friendData, client.getSocket()).start();
-
-
-
     }
 
 }

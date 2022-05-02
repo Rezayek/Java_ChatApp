@@ -17,6 +17,7 @@ import client.clientLocalDb.ClientDb;
 
 
 public class LoginClientThread extends Thread {
+    
     Socket s;
     Map<String, String> loginData = new LinkedHashMap<String, String>();
     Map<String, String> loggedData = new LinkedHashMap<String, String>();
@@ -40,12 +41,14 @@ public class LoginClientThread extends Thread {
 
         try {
             
+            
             loginData.put("event", "login");
             loginData.put("email", userEmail);
             loginData.put("password", userPassword);
             out = s.getOutputStream();
             outObj = new ObjectOutputStream(out);
             outObj.writeObject(loginData);
+            
             
         } catch (IOException e) {
             
@@ -60,8 +63,9 @@ public class LoginClientThread extends Thread {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            
+            System.out.println(loggedData);
             if(loggedData.isEmpty() != true){
+                
 
                 System.out.println(loggedData.get("id"));
                     
@@ -73,7 +77,7 @@ public class LoginClientThread extends Thread {
                     System.out.println("added");
 
                     client.setLoggedUser(Integer.parseInt(loggedData.get("id")), Boolean.parseBoolean(loggedData.get("logged")));
-
+                   
                 }
             }
         } catch (IOException e1) {
