@@ -98,11 +98,7 @@
                      <children>
                         <TableView fx:id="friendList" prefHeight="447.0" prefWidth="278.0" styleClass="transparent-background" stylesheets="@../Style/style.css">
                            <columns>
-                              <TableColumn fx:id="friends" prefWidth="277.60001143217085" text="friends">
-                                 <styleClass>
-                                    <String fx:value="dark-violet-background" />
-                                    <String fx:value="txtFont" />
-                                 </styleClass></TableColumn>
+                              <TableColumn fx:id="friends" prefWidth="277.60001143217085" text="friends" />
                            </columns></TableView>
                      </children></VBox>
                   <HBox prefHeight="38.0" prefWidth="278.0">
