@@ -3,6 +3,8 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller.ChatController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller.ChatController">
    <left>
       <HBox styleClass="gray-background" stylesheets="@../Style/style.css" BorderPane.alignment="CENTER">
          <children>
@@ -88,22 +90,40 @@
                      </styleClass>
                   </HBox>
                   <Pane prefHeight="2.0" prefWidth="200.0" styleClass="dark-gray-background" stylesheets="@../Style/style.css" />
-                  <VBox fx:id="friendsList" prefHeight="433.0" prefWidth="278.0" />
+                  <VBox fx:id="friendsList" prefHeight="433.0" prefWidth="278.0">
+                     <children>
+                        <TableView fx:id="friendList" prefHeight="447.0" prefWidth="278.0" styleClass="transparent-background" stylesheets="@../Style/style.css">
+                          <columns>
+                            <TableColumn prefWidth="277.60001143217085" style="-fx-background-color: #402e58;" />
+                          </columns>
+                        </TableView>
+                     </children></VBox>
                   <HBox prefHeight="38.0" prefWidth="278.0">
                      <children>
-                        <TextField fx:id="friendField" prefHeight="38.0" prefWidth="208.0">
+                        <HBox alignment="CENTER" prefHeight="34.0" prefWidth="214.0" stylesheets="@../Style/style.css">
+                           <children>
+                              <TextField fx:id="friendField" prefHeight="26.0" prefWidth="184.0" promptText="add new friend" styleClass="transparent-background" stylesheets="@../Style/style.css">
+                                 <font>
+                                    <Font name="Ebrima" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </TextField>
+                              <ImageView fx:id="addBtn" fitHeight="92.0" fitWidth="36.0" onMousePressed="#addFriendAction" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Assets/images/icons8-add-30.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <styleClass>
+                              <String fx:value="radius" />
+                              <String fx:value="dark-violet-background" />
+                           </styleClass>
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="30.0" />
                            </HBox.margin>
-                        </TextField>
-                        <ImageView fx:id="addBtn" fitHeight="39.0" fitWidth="59.0" onMouseClicked="#addFriendAction" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Assets/images/add.jpg" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin>
-                        </ImageView>
+                        </HBox>
                      </children>
                   </HBox>
                </children>
