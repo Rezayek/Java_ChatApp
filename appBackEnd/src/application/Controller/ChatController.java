@@ -69,7 +69,10 @@ public class ChatController implements Initializable {
     @FXML
     private Label defaultFriend;
     @FXML
-    private TableView friendList ;
+    private TableView<String> friendList ;
+    @FXML
+    private TableColumn friends ;
+    
     public static Map<String, String> genericFriends;
     
 

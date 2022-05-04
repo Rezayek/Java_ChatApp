@@ -94,7 +94,7 @@
                      <children>
                         <TableView fx:id="friendList" prefHeight="447.0" prefWidth="278.0" styleClass="transparent-background" stylesheets="@../Style/style.css">
                           <columns>
-                            <TableColumn prefWidth="277.60001143217085" style="-fx-background-color: #402e58;" />
+                            <TableColumn fx:id="friends" prefWidth="277.60001143217085" style="-fx-background-color: #402e58;" />
                           </columns>
                         </TableView>
                      </children></VBox>
