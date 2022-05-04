@@ -30,7 +30,7 @@ public class SignUpThread extends Thread {
 
                 
                 if(expectedValue.equals(actualValue)){
-                    System.out.println("sign up thread"+signUpData.get("email"));
+                    
                     try {
                         if(serverDb.checkUserEmail(signUpData.get("email")) == false){
                             UserModel user = new UserModel(00, null, null, null);

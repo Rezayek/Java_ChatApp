@@ -23,7 +23,7 @@ public class AddFriendThread extends Thread  {
 
     public void run(){
         int id ;
-        System.out.println("friend name server : "+friendData.get("name"));
+        
             if(friendData.isEmpty() != true){
 
                 

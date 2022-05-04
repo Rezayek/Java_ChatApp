@@ -33,7 +33,7 @@ public class GetFriendsThread extends Thread  {
                 Iterator<Map.Entry<String, String>> iterator = requesteData.entrySet().iterator();
                 Map.Entry<String, String> actualValue = iterator.next();
                 Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "getfriends");
-                System.out.println(requesteData);
+                
                 if(expectedValue.equals(actualValue)){
 
                     usersList = serverDb.getFriends(Integer.parseInt(requesteData.get("id")));

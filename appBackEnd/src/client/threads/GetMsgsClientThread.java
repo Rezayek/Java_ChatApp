@@ -12,7 +12,7 @@ import server.threads.builds.OutBuild;
 
 public class GetMsgsClientThread extends Thread {
 
-    public static Map<String, String> genericMsgMap;
+    public static Map<String, String> genericMsgMap = null;
     public static int friendId;
     Map<String, String> requesteData = new LinkedHashMap<String, String>();
     Map<String, String> resultsData = new LinkedHashMap<String, String>();

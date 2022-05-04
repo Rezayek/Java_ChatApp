@@ -29,7 +29,8 @@ public class ClientDb {
 
 
 
-    public void setLoggedUser(int userId , boolean isLogged){
+    public void setLoggedUser(int userId , boolean isLogged) throws SQLException{
+        System.out.println(checkUser(userId));
         if(checkUser(userId)){
             
             try {
@@ -45,7 +46,7 @@ public class ClientDb {
             String req = "insert into login(userId, isLogged) values(?, ?)";
 
             try {
-                System.out.println("adding");
+                
                 statement = ConnectToDbClient.con.prepareStatement(req);
                 statement.setInt(1, userId);
                 statement.setBoolean(2, isLogged);
@@ -90,7 +91,7 @@ public class ClientDb {
             e.printStackTrace();
         }
     }
-    public Boolean checkUser(int userId){
+    public Boolean checkUser(int userId) throws SQLException{
         ResultSet res = null;
         try {
             statement = ConnectToDbClient.con.prepareStatement("Select userId from login where userId = ? ");
@@ -99,11 +100,11 @@ public class ClientDb {
         } catch (SQLException e) {
             e.printStackTrace();
         } 
-        if(res != null){
+        if(res.next()){
             return true;
-        }else{
-            return false;
         }
+        return false;
+        
     }
 
     //get the logged user id

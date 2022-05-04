@@ -157,7 +157,17 @@ public class UserController {
         password = passWord.getText();
         LoginClientThread logUser = new LoginClientThread(client.getSocket(), username, password);
         logUser.start();
-        logUser.join();
+        try {
+            logUser.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
         
         changeWindow();
             

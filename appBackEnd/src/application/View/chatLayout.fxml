@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller.ChatController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller.ChatController">
    <left>
       <HBox styleClass="gray-background" stylesheets="@../Style/style.css" BorderPane.alignment="CENTER">
          <children>
@@ -149,7 +149,7 @@
             <Pane prefHeight="3.0" prefWidth="440.0" styleClass="gray-background" stylesheets="@../Style/style.css" />
             <ScrollPane prefHeight="442.0" prefWidth="440.0">
                <content>
-                  <Pane fx:id="conversation" prefHeight="427.0" prefWidth="442.0" styleClass="light-gray-background" stylesheets="@../Style/style.css">
+                  <Pane fx:id="conversationPane" prefHeight="427.0" prefWidth="442.0" styleClass="light-gray-background" stylesheets="@../Style/style.css">
                      <children>
                         <TableView fx:id="conversation" layoutX="-2.0" prefHeight="434.0" prefWidth="432.0">
                           <columns>

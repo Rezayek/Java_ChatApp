@@ -40,11 +40,13 @@ public class GetMsgThread extends Thread  {
                         if(msgsList.isEmpty() != true){
                             msgsData.put("result", "msgs");
                             for(int i = 0 ; i < msgsList.size(); i++){
-                                msgsData.put(String.valueOf(msgsList.get(i).getSenderId()), msgsList.get(i).gettext());
+                                msgsData.put(String.valueOf(msgsList.get(i).getSenderId())+"/"+i, msgsList.get(i).gettext());
                             }
                             new OutBuild(msgsData, s).start();
                             
 
+                        }else{
+                            new OutBuild(null, s).start();
                         }
 
                     

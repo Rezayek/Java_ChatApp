@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -63,7 +64,6 @@ public class LoginClientThread extends Thread {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            System.out.println(loggedData);
             if(loggedData.isEmpty() != true){
                 
 
@@ -74,15 +74,21 @@ public class LoginClientThread extends Thread {
                 Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("event", "islogged");
 
                 if(expectedValue.equals(actualValue)){
-                    System.out.println("added");
 
                     client.setLoggedUser(Integer.parseInt(loggedData.get("id")), Boolean.parseBoolean(loggedData.get("logged")));
+                    
                    
                 }
             }
         } catch (IOException e1) {
             
             e1.printStackTrace();
+        } catch (NumberFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
            
 

@@ -58,7 +58,6 @@ public class GetFriendsClientThread extends Thread {
 
                 if(expectedValue.equals(actualValue)){
                     genericFriendMap = resultsData;
-                    System.out.println(genericFriendMap);
                 }
 
 
