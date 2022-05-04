@@ -76,10 +76,14 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField prefHeight="26.0" prefWidth="184.0" promptText="search" styleClass="transparent-background" stylesheets="@../Style/style.css">
+                        <TextField prefHeight="26.0" prefWidth="184.0" promptText="search" stylesheets="@../Style/style.css">
                            <font>
                               <Font name="Ebrima" size="15.0" />
-                           </font></TextField>
+                           </font>
+                           <styleClass>
+                              <String fx:value="transparent-background" />
+                              <String fx:value="txtFont" />
+                           </styleClass></TextField>
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
@@ -94,7 +98,11 @@
                      <children>
                         <TableView fx:id="friendList" prefHeight="447.0" prefWidth="278.0" styleClass="transparent-background" stylesheets="@../Style/style.css">
                            <columns>
-                              <TableColumn fx:id="friends" prefWidth="277.60001143217085" text="friends" />
+                              <TableColumn fx:id="friends" prefWidth="277.60001143217085" text="friends">
+                                 <styleClass>
+                                    <String fx:value="dark-violet-background" />
+                                    <String fx:value="txtFont" />
+                                 </styleClass></TableColumn>
                            </columns></TableView>
                      </children></VBox>
                   <HBox prefHeight="38.0" prefWidth="278.0">
