@@ -155,8 +155,9 @@ public class UserController {
     public void login() throws SQLException, InterruptedException {
         username = userName.getText();
         password = passWord.getText();
-        new LoginClientThread(client.getSocket(), username, password).start();
-        new GetFriendsClientThread(clientDb.getId(), client.getSocket());
+        LoginClientThread logUser = new LoginClientThread(client.getSocket(), username, password);
+        logUser.start();
+        logUser.join();
         
         changeWindow();
             

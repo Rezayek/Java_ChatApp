@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller.ChatController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller.ChatController">
    <left>
       <HBox styleClass="gray-background" stylesheets="@../Style/style.css" BorderPane.alignment="CENTER">
          <children>
@@ -93,10 +93,9 @@
                   <VBox fx:id="friendsList" prefHeight="433.0" prefWidth="278.0">
                      <children>
                         <TableView fx:id="friendList" prefHeight="447.0" prefWidth="278.0" styleClass="transparent-background" stylesheets="@../Style/style.css">
-                          <columns>
-                            <TableColumn fx:id="friends" prefWidth="277.60001143217085" style="-fx-background-color: #402e58;" />
-                          </columns>
-                        </TableView>
+                           <columns>
+                              <TableColumn fx:id="friends" prefWidth="277.60001143217085" text="friends" />
+                           </columns></TableView>
                      </children></VBox>
                   <HBox prefHeight="38.0" prefWidth="278.0">
                      <children>

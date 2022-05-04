@@ -1,12 +1,15 @@
 package application.Controller;
 
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.models.FriendModel;
 import application.subView.friendView.FriendList;
 import client.Client;
 import client.clientLocalDb.ClientDb;
@@ -14,6 +17,7 @@ import client.clientLocalDb.clientModels.MsgDataModel;
 import client.threads.GetFriendsClientThread;
 import client.threads.SendFriendClientThread;
 import client.threads.SendMsgClientThread;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +26,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
@@ -69,11 +75,15 @@ public class ChatController implements Initializable {
     @FXML
     private Label defaultFriend;
     @FXML
-    private TableView<String> friendList ;
+    private TableView<FriendModel> friendList ;
     @FXML
-    private TableColumn friends ;
+    private TableColumn<FriendModel, String> friends ;
     
     public static Map<String, String> genericFriends;
+    private List<String> friendsValue;
+    private List<FriendModel> friendsListModels;
+    private List<String> friendsId;
+    ObservableList<FriendModel> friendsName ;
     
 
     ClientDb client = ClientDb.getInstance();
@@ -89,6 +99,28 @@ public class ChatController implements Initializable {
             e.printStackTrace();
         }
         genericFriends = GetFriendsClientThread.genericFriendMap;
+        friendsValue = new ArrayList<String>(genericFriends.values());
+        friendsId = new ArrayList<String>(genericFriends.keySet());
+        friendsListModels = new ArrayList<FriendModel>();
+        
+        for(int i = 1;i < friendsValue.size(); i++){
+            //System.out.println(friendsValue.get(i));
+            friendsListModels.add( new FriendModel(friendsValue.get(i)) );
+            
+            
+        } 
+        for(int i = 0;i < friendsListModels.size(); i++){
+            System.out.println(friendsListModels.get(i).getName());
+        }
+        
+        
+        friendsName = FXCollections.observableArrayList(friendsListModels);
+        friends.setCellValueFactory(new PropertyValueFactory<FriendModel, String>("name"));
+        friendList.setItems(friendsName);
+        friendList.getColumns().add(friends);
+
+
+        
 
         
 
@@ -98,7 +130,37 @@ public class ChatController implements Initializable {
     
     @FXML
     void addFriendAction(MouseEvent event) {
-        new SendFriendClientThread(friendField.getText(), client.getId()).start();
+        SendFriendClientThread sendThread = new SendFriendClientThread(friendField.getText(), client.getId());
+        sendThread.start();
+        try {
+            sendThread.join();
+        } catch (InterruptedException e) {
+           
+            e.printStackTrace();
+        }
+        GetFriendsClientThread tFriend = new GetFriendsClientThread(client.getId(), clientS.getSocket());
+        tFriend.start();
+        try {
+            tFriend.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        genericFriends = GetFriendsClientThread.genericFriendMap;
+        friendsValue = new ArrayList<String>(genericFriends.values());
+        friendsId = new ArrayList<String>(genericFriends.keySet());
+        friendsListModels = new ArrayList<FriendModel>();
+        
+        for(int i = 1;i < friendsValue.size(); i++){
+            friendsListModels.add( new FriendModel(friendsValue.get(i)) );
+            
+            
+        }         
+        friendsName = FXCollections.observableArrayList(friendsListModels);
+        //friends.setCellValueFactory(new PropertyValueFactory<FriendModel, String>("name"));
+        friendList.setItems(friendsName);
+        //friendList.getColumns().add(friends);
+        friendList.refresh();
+
     }
 
     @FXML public void logOut(InputEvent event) {
