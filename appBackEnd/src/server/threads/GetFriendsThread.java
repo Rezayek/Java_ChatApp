@@ -47,6 +47,8 @@ public class GetFriendsThread extends Thread  {
                         }
                         new OutBuild(friendsData, s).start();
                         
+                    }else{
+                        new OutBuild(null, s).start();
                     }
                     
                 

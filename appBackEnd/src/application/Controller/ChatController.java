@@ -114,19 +114,32 @@ public class ChatController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         genericFriends = GetFriendsClientThread.genericFriendMap;
         friendsValue = new ArrayList<String>(genericFriends.values());
         friendsId = new ArrayList<String>(genericFriends.keySet());
         friendsListModels = new ArrayList<FriendModel>();
-        
-        for(int i = 1;i < friendsValue.size(); i++){
-            friendsListModels.add( new FriendModel(friendsValue.get(i)) );   
-        } 
-        
-        friendsName = FXCollections.observableArrayList(friendsListModels);
         friends.setCellValueFactory(new PropertyValueFactory<FriendModel, String>("name"));
-        friendList.setItems(friendsName);
         friendList.getColumns().add(friends);
+        if(!(genericFriends == null || genericFriends.isEmpty())){
+            for(int i = 1;i < friendsValue.size(); i++){
+                friendsListModels.add( new FriendModel(friendsValue.get(i)) );   
+            } 
+            
+            friendsName = FXCollections.observableArrayList(friendsListModels);
+            
+            friendList.setItems(friendsName);
+
+        }else{
+            friendsListModels = new ArrayList<FriendModel>();
+            genericFriends = null;
+            friendsName = FXCollections.observableArrayList(friendsListModels);
+            friendList.setItems(friendsName);
+
+        }
+        
+        
+        
 
         friendRep.setCellValueFactory(new PropertyValueFactory<MsgModel, String>("senderName"));
         myRep.setCellValueFactory(new PropertyValueFactory<MsgModel, String>("senderMsg"));
