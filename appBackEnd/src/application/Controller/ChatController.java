@@ -46,7 +46,7 @@ public class ChatController implements Initializable {
     private ImageView chatBtn;
 
     @FXML
-    private Pane conversation;
+    private Pane pane;
 
     @FXML
     private TextField friendField;
@@ -78,6 +78,15 @@ public class ChatController implements Initializable {
     private TableView<FriendModel> friendList ;
     @FXML
     private TableColumn<FriendModel, String> friends ;
+    @FXML
+    private TableView conversation  ;  
+    @FXML
+    private TableColumn friendRep  ;  
+    @FXML
+    private TableColumn myRep  ; 
+   
+    
+    
     
     public static Map<String, String> genericFriends;
     private List<String> friendsValue;
