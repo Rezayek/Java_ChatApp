@@ -151,7 +151,12 @@
                <content>
                   <Pane fx:id="conversation" prefHeight="427.0" prefWidth="442.0" styleClass="light-gray-background" stylesheets="@../Style/style.css">
                      <children>
-                        <VBox fx:id="converstionWidget" layoutY="7.0" prefHeight="417.0" prefWidth="427.0" />
+                        <TableView fx:id="conversation" layoutX="-2.0" prefHeight="434.0" prefWidth="432.0">
+                          <columns>
+                            <TableColumn fx:id="friendRep" maxWidth="231.1999419927597" minWidth="-1.0" prefWidth="214.39995419979095" text="C1" />
+                            <TableColumn fx:id="myRep" minWidth="0.0" prefWidth="216.8000030517578" text="C2" />
+                          </columns>
+                        </TableView>
                      </children></Pane>
                </content>
             </ScrollPane>
