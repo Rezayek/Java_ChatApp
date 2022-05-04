@@ -14,6 +14,7 @@ import client.clientLocalDb.clientModels.MsgDataModel;
 import client.threads.GetFriendsClientThread;
 import client.threads.SendFriendClientThread;
 import client.threads.SendMsgClientThread;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -69,6 +70,8 @@ public class ChatController implements Initializable {
     private Label defaultFriend;
     @FXML
     private TableView friendList ;
+    public static Map<String, String> genericFriends;
+    
 
     ClientDb client = ClientDb.getInstance();
     Client clientS = Client.getInstance();
@@ -82,11 +85,11 @@ public class ChatController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        FriendList.friendsData = GetFriendsClientThread.genericFriendMap;
-        System.out.println("from list "+FriendList.friendsData);
+        genericFriends = GetFriendsClientThread.genericFriendMap;
+
         
-        FriendList.oldMap = FriendList.friendsData;
-        System.out.println("from list old  "+FriendList.oldMap);
+
+        
 		
 	}
     
