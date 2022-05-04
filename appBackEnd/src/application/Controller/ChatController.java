@@ -118,6 +118,11 @@ public class ChatController implements Initializable {
         friends.setCellValueFactory(new PropertyValueFactory<FriendModel, String>("name"));
         friendList.setItems(friendsName);
         friendList.getColumns().add(friends);
+        friendList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                System.out.println("selected");
+            }
+        });
 
 
         
