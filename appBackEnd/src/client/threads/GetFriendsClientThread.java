@@ -15,7 +15,7 @@ import java.util.Map;
 import server.threads.builds.OutBuild;
 
 public class GetFriendsClientThread extends Thread {
-    public static Map<String, String> genericFriendMap;
+    public static Map<String, String> genericFriendMap  = new LinkedHashMap<String, String>();
 
     Map<String, String> friendsData = new LinkedHashMap<String, String>();
     Map<String, String> resultsData = new LinkedHashMap<String, String>();
@@ -58,6 +58,7 @@ public class GetFriendsClientThread extends Thread {
 
                 if(expectedValue.equals(actualValue)){
                     genericFriendMap = resultsData;
+                    System.out.println(genericFriendMap);
                 }
 
 

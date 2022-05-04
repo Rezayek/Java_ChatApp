@@ -7,18 +7,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+import application.subView.friendView.FriendList;
 import client.Client;
 import client.clientLocalDb.ClientDb;
 import client.clientLocalDb.clientModels.MsgDataModel;
+import client.threads.GetFriendsClientThread;
 import client.threads.SendFriendClientThread;
 import client.threads.SendMsgClientThread;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
@@ -27,7 +30,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ChatController {
+public class ChatController implements Initializable {
 
     @FXML
     private ImageView addBtn;
@@ -40,9 +43,6 @@ public class ChatController {
 
     @FXML
     private TextField friendField;
-
-    @FXML
-    private VBox friendsList;
 
     @FXML
     private TextField msgField;
@@ -67,17 +67,26 @@ public class ChatController {
     private ImageView logOutBtn;
     @FXML
     private Label defaultFriend;
+    @FXML
+    private TableView friendList ;
 
     ClientDb client = ClientDb.getInstance();
-
-
-
     Client clientS = Client.getInstance();
 
-
+    @Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//new FriendList(friendsList).start();
-        //new MsgWidget(converstionWidget).start();
+        GetFriendsClientThread tFriend = new GetFriendsClientThread(client.getId(), clientS.getSocket());
+        tFriend.start();
+        try {
+            tFriend.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        FriendList.friendsData = GetFriendsClientThread.genericFriendMap;
+        System.out.println("from list "+FriendList.friendsData);
+        
+        FriendList.oldMap = FriendList.friendsData;
+        System.out.println("from list old  "+FriendList.oldMap);
 		
 	}
     
@@ -112,6 +121,7 @@ public class ChatController {
 
 
     }
+    
     
     
     

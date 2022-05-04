@@ -93,7 +93,7 @@ public class App extends Application {
         //------------------------------------------------------------------------
         //----------change this thread and add FriendList.oldMap/FriendList.friendsData-----------------------------
         //------------------------------------------------------------------------
-        new FriendList(main).start();
+        //new FriendList(main).start();
         //-------------------------------------------------------------------------
         //------------------------------------------------------------------------
         //------------------------------------------------------------------------
@@ -160,7 +160,7 @@ public class App extends Application {
                 }
                 
                 FriendList.friendsData = genericFriends;
-                FriendList.finishDisplayFriends = false;
+                //FriendList.finishDisplayFriends = false;
                 primaryStage.close();
                 
                 try {

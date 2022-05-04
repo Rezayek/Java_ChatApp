@@ -8,7 +8,7 @@ import java.util.Set;
 import client.clientLocalDb.ClientDb;
 import javafx.scene.layout.VBox;
 
-public class FriendList extends Thread {
+public class FriendList  {
     public static Map<String, String> oldMap = new LinkedHashMap<String, String>();
     public static Boolean finishDisplayFriends = false;
     public static Map<String, String> friendsData ;
@@ -20,16 +20,11 @@ public class FriendList extends Thread {
         this.main = main;  
     }
 
-    public void run() {
-        while (true){
-            
-               
-            while(!finishDisplayFriends){
+    public void addFriends() {
+        
                 
                 widgets = new ArrayList<FriendWidget>();
-                System.out.println(friendsData);
-                if(oldMap.isEmpty() != true){
-                    
+                if(oldMap.isEmpty() != true){    
                 Set<String> keys = friendsData.keySet();
                 for (String key : keys) {
                 if(!key.equals("result")){
@@ -47,8 +42,6 @@ public class FriendList extends Thread {
                 System.out.println("here size : "+  widgets.size());
                 }
 
-                finishDisplayFriends = true;
-
             }
             else{
                 Set<String> keys = friendsData.keySet();
@@ -62,14 +55,13 @@ public class FriendList extends Thread {
                 for(int i = 0 ; i< widgets.size(); i++){
                 main.getChildren().add(widgets.get(i).getBox());
                 }
-                finishDisplayFriends = true;
             }
             
         }
 
-        }    
+           
 
-        }
+    
            
 
         }

@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Timer;
 
+import client.threads.GetFriendsClientThread;
 import client.threads.LoginClientThread;
 import client.threads.SignUpClientThread;
 
@@ -155,6 +156,7 @@ public class UserController {
         username = userName.getText();
         password = passWord.getText();
         new LoginClientThread(client.getSocket(), username, password).start();
+        new GetFriendsClientThread(clientDb.getId(), client.getSocket());
         
         changeWindow();
             
