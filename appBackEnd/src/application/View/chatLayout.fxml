@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller.ChatController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller.ChatController">
    <left>
       <HBox styleClass="gray-background" stylesheets="@../Style/style.css" BorderPane.alignment="CENTER">
          <children>
@@ -101,13 +101,17 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="214.0" stylesheets="@../Style/style.css">
                            <children>
-                              <TextField fx:id="friendField" prefHeight="26.0" prefWidth="184.0" promptText="add new friend" styleClass="transparent-background" stylesheets="@../Style/style.css">
+                              <TextField fx:id="friendField" prefHeight="26.0" prefWidth="184.0" promptText="add new friend" stylesheets="@../Style/style.css">
                                  <font>
                                     <Font name="Ebrima" size="15.0" />
                                  </font>
                                  <padding>
                                     <Insets left="20.0" />
                                  </padding>
+                                 <styleClass>
+                                    <String fx:value="transparent-background" />
+                                    <String fx:value="txtFont" />
+                                 </styleClass>
                               </TextField>
                               <ImageView fx:id="addBtn" fitHeight="92.0" fitWidth="36.0" onMousePressed="#addFriendAction" pickOnBounds="true" preserveRatio="true">
                                  <image>
