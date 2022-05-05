@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 import application.models.FriendModel;
 import application.models.MsgModel;
-import application.subView.friendView.FriendList;
+
 import client.Client;
 import client.clientLocalDb.ClientDb;
 import client.clientLocalDb.clientModels.MsgDataModel;
@@ -152,6 +152,7 @@ public class ChatController implements Initializable {
                 conversation.getItems().clear();
                 ConvThread.currentFriend = friendsValue.get(friendList.getSelectionModel().getSelectedIndex()+1);
                 ConvThread.currentFriendId = Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1));
+                ConvThread.isRunning = true;
                 conversationThread.start();
                 //ChatController.currentFriend = friendsValue.get(friendList.getSelectionModel().getSelectedIndex()+1);
                 //ChatController.currentFriendId = Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1));
@@ -235,8 +236,8 @@ public class ChatController implements Initializable {
     }
 
     @FXML public void logOut(InputEvent event) {
+        ConvThread.isRunning = false;
         client.logOut(client.getId());
-        
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         stage.close();

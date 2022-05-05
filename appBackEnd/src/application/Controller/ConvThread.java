@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 
 public class ConvThread extends Thread {
 
+    public static Boolean isRunning;
     public static String currentFriend;
     public static int currentFriendId;
     public static TableView<MsgModel> conversation;
@@ -34,7 +35,7 @@ public class ConvThread extends Thread {
 
     public void run(){
 
-        while (true){
+        while (isRunning){
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e1) {
