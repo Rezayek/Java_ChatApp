@@ -89,16 +89,17 @@ public class ChatController implements Initializable {
    
     
     
-    public static String currentFriend;
+    //public static String currentFriend;
     public static int currentFriendId;
     public static Map<String, String> genericFriends;
-    public static Map<String, String> genericMsgs =  new LinkedHashMap<String, String>();
+    //public static Map<String, String> genericMsgs =  new LinkedHashMap<String, String>();
     private List<String> friendsValue;
     private List<FriendModel> friendsListModels;
     private List<String> friendsId;
     ObservableList<FriendModel> friendsName ;
-    ObservableList<MsgModel> ConversationMsgs ;
-    private List<MsgModel> mgsModelList = new ArrayList<MsgModel>();
+    //ObservableList<MsgModel> ConversationMsgs ;
+    //private List<MsgModel> mgsModelList = new ArrayList<MsgModel>();
+    private ConvThread conversationThread = new ConvThread();
 
     
 
@@ -107,6 +108,7 @@ public class ChatController implements Initializable {
 
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
+        ConvThread.conversation = conversation;
         GetFriendsClientThread tFriend = new GetFriendsClientThread(client.getId(), clientS.getSocket());
         tFriend.start();
         try {
@@ -148,44 +150,45 @@ public class ChatController implements Initializable {
         friendList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 conversation.getItems().clear();
+                ConvThread.currentFriend = friendsValue.get(friendList.getSelectionModel().getSelectedIndex()+1);
+                ConvThread.currentFriendId = Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1));
+                conversationThread.start();
+                //ChatController.currentFriend = friendsValue.get(friendList.getSelectionModel().getSelectedIndex()+1);
+                //ChatController.currentFriendId = Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1));
                 
-                ChatController.currentFriend = friendsValue.get(friendList.getSelectionModel().getSelectedIndex()+1);
-                ChatController.currentFriendId = Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1));
-                System.out.println(ChatController.currentFriend);
-                System.out.println(ChatController.currentFriendId);
-                GetMsgsClientThread getMsgs = new GetMsgsClientThread(client.getId(), ChatController.currentFriendId , clientS.getSocket());
-                getMsgs.start();
-                try {
-                    getMsgs.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                // GetMsgsClientThread getMsgs = new GetMsgsClientThread(client.getId(), ChatController.currentFriendId , clientS.getSocket());
+                // getMsgs.start();
+                // try {
+                //     getMsgs.join();
+                // } catch (InterruptedException e) {
+                //     e.printStackTrace();
+                // }
                
-                genericMsgs = GetMsgsClientThread.genericMsgMap;
-                System.out.println(genericMsgs);
-                if(!(genericMsgs == null || genericMsgs.isEmpty())){ 
-                    mgsModelList = new ArrayList<MsgModel>();
-                    for (String key : genericMsgs.keySet()) {
-                        System.out.println(key);
-                        if(key != "result"){
-                            if(key.contains(String.valueOf(client.getId())+"/")){
-                                mgsModelList.add(new MsgModel("you : ", genericMsgs.get(key)));
-                            }else if(key.contains(String.valueOf(currentFriendId+"/"))){
-                                mgsModelList.add(new MsgModel(ChatController.currentFriend, genericMsgs.get(key)));
-                            }
-                        }
-                    }
-                    ConversationMsgs = FXCollections.observableArrayList(mgsModelList);
+                // genericMsgs = GetMsgsClientThread.genericMsgMap;
+                // System.out.println(genericMsgs);
+                // if(!(genericMsgs == null || genericMsgs.isEmpty())){ 
+                //     mgsModelList = new ArrayList<MsgModel>();
+                //     for (String key : genericMsgs.keySet()) {
+                //         System.out.println(key);
+                //         if(key != "result"){
+                //             if(key.contains(String.valueOf(client.getId())+"/")){
+                //                 mgsModelList.add(new MsgModel("you : ", genericMsgs.get(key)));
+                //             }else if(key.contains(String.valueOf(currentFriendId+"/"))){
+                //                 mgsModelList.add(new MsgModel(ChatController.currentFriend, genericMsgs.get(key)));
+                //             }
+                //         }
+                //     }
+                //     ConversationMsgs = FXCollections.observableArrayList(mgsModelList);
                     
-                    conversation.setItems(ConversationMsgs);
+                //     conversation.setItems(ConversationMsgs);
                     
-                }
-                else{
-                    mgsModelList = new ArrayList<MsgModel>();
-                    genericMsgs = null;
-                    ConversationMsgs = FXCollections.observableArrayList(mgsModelList);
-                    conversation.setItems(ConversationMsgs);
-                }
+                // }
+                // else{
+                //     mgsModelList = new ArrayList<MsgModel>();
+                //     genericMsgs = null;
+                //     ConversationMsgs = FXCollections.observableArrayList(mgsModelList);
+                //     conversation.setItems(ConversationMsgs);
+                // }
             }
         });
 
@@ -253,8 +256,11 @@ public class ChatController implements Initializable {
     @FXML
     void sendMasgToFriend(MouseEvent event) {
         conversation.getItems().clear();
-        ChatController.currentFriend = friendsValue.get(friendList.getSelectionModel().getSelectedIndex()+1);
-        ChatController.currentFriendId = Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1));
+        //ChatController.currentFriend = friendsValue.get(friendList.getSelectionModel().getSelectedIndex()+1);
+        //ChatController.currentFriendId = Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1));
+        ChatController.currentFriendId = Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1)); 
+        ConvThread.currentFriend = friendsValue.get(friendList.getSelectionModel().getSelectedIndex()+1);
+        ConvThread.currentFriendId = Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1));
         SendMsgClientThread sendingMsg = new SendMsgClientThread(new MsgDataModel(client.getId(), msgField.getText()), ChatController.currentFriendId);
         msgField.setText("");
         sendingMsg.start();
@@ -264,30 +270,30 @@ public class ChatController implements Initializable {
             e1.printStackTrace();
         }
         
-         GetMsgsClientThread getMsgs = new GetMsgsClientThread(client.getId(), Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1)), clientS.getSocket());
-         getMsgs.start();
-         try {
-             getMsgs.join();
-         } catch (InterruptedException e) {
-             e.printStackTrace();
-         }
-         genericMsgs = new LinkedHashMap<String, String>();
-         genericMsgs = GetMsgsClientThread.genericMsgMap;
-         if(!(genericMsgs == null || genericMsgs.isEmpty())){
-             mgsModelList = new ArrayList<MsgModel>();
-             for (String key : genericMsgs.keySet()) {
-                 if(key != "result"){
-                     if(key.contains(String.valueOf(client.getId())+"/")){
-                         mgsModelList.add(new MsgModel("you : ", genericMsgs.get(key)));
-                     }else if(key.contains(String.valueOf(currentFriendId+"/"))){
-                         mgsModelList.add(new MsgModel(ChatController.currentFriend, genericMsgs.get(key)));
-                     }
-                 }
-             }
-             ConversationMsgs = FXCollections.observableArrayList(mgsModelList);
-             conversation.setItems(ConversationMsgs);
-             conversation.refresh();
-         }
+        //  GetMsgsClientThread getMsgs = new GetMsgsClientThread(client.getId(), Integer.parseInt(friendsId.get(friendList.getSelectionModel().getSelectedIndex()+1)), clientS.getSocket());
+        //  getMsgs.start();
+        //  try {
+        //      getMsgs.join();
+        //  } catch (InterruptedException e) {
+        //      e.printStackTrace();
+        //  }
+        //  genericMsgs = new LinkedHashMap<String, String>();
+        //  genericMsgs = GetMsgsClientThread.genericMsgMap;
+        //  if(!(genericMsgs == null || genericMsgs.isEmpty())){
+        //      mgsModelList = new ArrayList<MsgModel>();
+        //      for (String key : genericMsgs.keySet()) {
+        //          if(key != "result"){
+        //              if(key.contains(String.valueOf(client.getId())+"/")){
+        //                  mgsModelList.add(new MsgModel("you : ", genericMsgs.get(key)));
+        //              }else if(key.contains(String.valueOf(currentFriendId+"/"))){
+        //                  mgsModelList.add(new MsgModel(ChatController.currentFriend, genericMsgs.get(key)));
+        //              }
+        //          }
+        //      }
+        //      ConversationMsgs = FXCollections.observableArrayList(mgsModelList);
+        //      conversation.setItems(ConversationMsgs);
+        //      conversation.refresh();
+        //  }
 
 
     }
