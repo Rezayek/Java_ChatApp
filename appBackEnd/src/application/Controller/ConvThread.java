@@ -37,7 +37,7 @@ public class ConvThread extends Thread {
 
         while (isRunning){
             try {
-                Thread.sleep(50);
+                Thread.sleep(30);
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }
