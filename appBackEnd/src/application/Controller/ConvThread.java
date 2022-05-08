@@ -69,6 +69,7 @@ public class ConvThread extends Thread {
                 else{
                     mgsModelList = new ArrayList<MsgModel>();
                     genericMsgs = null;
+                    mgsModelList.add(new MsgModel("", "") );
                     ConversationMsgs = FXCollections.observableArrayList(mgsModelList);
                     conversation.setItems(ConversationMsgs);
                 }

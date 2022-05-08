@@ -67,7 +67,7 @@ public class LoginClientThread extends Thread {
             if(loggedData.isEmpty() != true){
                 
 
-                System.out.println(loggedData.get("id"));
+                
                     
                 Iterator<Map.Entry<String, String>> iterator = loggedData.entrySet().iterator();
                 Map.Entry<String, String> actualValue = iterator.next();

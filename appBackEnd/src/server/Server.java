@@ -15,8 +15,7 @@ public class Server {
         try {
             try (ServerSocket server = new ServerSocket(9000)) {
                 while (nbClient < 3 ){
-                    //Listen to incomming requests
-                    System.out.println("conected");
+                    
                     Socket ClientCon = server.accept();
                     
                     new InBuild(ClientCon).start();

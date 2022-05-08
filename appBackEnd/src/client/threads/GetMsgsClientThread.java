@@ -45,21 +45,27 @@ public class GetMsgsClientThread extends Thread {
                 e.printStackTrace();
             } 
 
+            if(resultsData != null){
 
-            if(resultsData.isEmpty() != true){
+                if(resultsData.isEmpty() != true){
 
-                Iterator<Map.Entry<String, String>> iterator = resultsData.entrySet().iterator();
-                Map.Entry<String, String> actualValue = iterator.next();
-                Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("result", "msgs");
-
-                if(expectedValue.equals(actualValue)){
-
-                    genericMsgMap = resultsData;
-                    
+                    Iterator<Map.Entry<String, String>> iterator = resultsData.entrySet().iterator();
+                    Map.Entry<String, String> actualValue = iterator.next();
+                    Map.Entry<String, String> expectedValue = new AbstractMap.SimpleEntry<String, String>("result", "msgs");
+    
+                    if(expectedValue.equals(actualValue)){
+    
+                        genericMsgMap = resultsData;
+                        
+                    }
+    
+    
                 }
 
-
             }
+
+
+            
 
         
         }
